@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class PagamentoAluno {
 	private int idPagamento;
-	private Aluno aluno;
+	private Cliente cliente;
 	private double totalJuros;
 	private double totalDesconto;
 	private double valorPago;
@@ -20,11 +20,11 @@ public class PagamentoAluno {
 	public void setIdPagamento(int idPagamento) {
 		this.idPagamento = idPagamento;
 	}
-	public Aluno getAluno() {
-		return aluno;
+	public Cliente getAluno() {
+		return cliente;
 	}
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setAluno(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public double getTotalJuros() {
 		return totalJuros;

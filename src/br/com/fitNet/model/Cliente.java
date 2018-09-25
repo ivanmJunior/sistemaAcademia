@@ -1,19 +1,16 @@
 package br.com.fitNet.model;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import br.com.fitNet.model.Endereco;;
 
-public class Aluno extends Pessoa{
+
+public class Cliente extends Pessoa{
 	
 	private Matricula matricula;
 	private Date dataCadastro;
 	private Date dataAlteracao;
 	
-	
-	public Aluno(){
-	   matricula = new Matricula();
+	public Cliente(){
+		matricula = new Matricula();
 	}
 
 	public Matricula getMatricula() {

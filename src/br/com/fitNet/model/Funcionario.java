@@ -35,5 +35,6 @@ public abstract class Funcionario extends Pessoa{
 		this.dataCadastro = dataCadastro;
 	}
 
+
 	
 }

@@ -7,9 +7,8 @@ public class Acesso {
 	private int id;
 	private String usuario;
 	private String senha;
-	private boolean status;
-	private boolean eliminado;
-	private int idFunionario;
+	private String statusAtivo = "S";
+	private String eliminado = "N";
 	private Date dataCadastro;
 	private Date dataAlteracao;
 	public static Acesso USUARIO_LOGADO;
@@ -32,24 +31,19 @@ public class Acesso {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public boolean isStatus() {
-		return status;
+	public String getStatusAtivo() {
+		return statusAtivo;
 	}
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setStatusAtivo(String status) {
+		this.statusAtivo = status;
 	}
-	public boolean isEliminado() {
+	public String getEliminado() {
 		return eliminado;
 	}
-	public void setEliminado(boolean eliminado) {
+	public void setEliminado(String eliminado) {
 		this.eliminado = eliminado;
 	}
-	public int getIdFunionario() {
-		return idFunionario;
-	}
-	public void setIdFunionario(int idFunionario) {
-		this.idFunionario = idFunionario;
-	}
+
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}

@@ -20,7 +20,8 @@ public abstract class Pessoa{
 	private int idade;
 	private boolean eliminado;
 	private String Observacao;
-	private Endereco endereco;
+	private Acesso acesso = new Acesso();
+	private Endereco endereco = new Endereco();
 	
 	public int getId() {
 		return id;
@@ -126,5 +127,11 @@ public abstract class Pessoa{
 		this.idade = idade;
 	}
 
-	
+	public Acesso getAcesso() {
+		return acesso;
+	}
+	public void setAcesso(Acesso acesso) {
+		this.acesso = acesso;
+	}
+
 }

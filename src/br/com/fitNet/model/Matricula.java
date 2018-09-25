@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Matricula {
 
-	private int matricula;
+	private int numeroMatricula;
 	private int idMatricula;
 	private Date dataMatricula;
 	private boolean statusMatriculaAtiva;
@@ -57,12 +57,12 @@ public class Matricula {
 		this.contrato = contrato;
 	}
 
-	public int getMatricula() {
-		return matricula;
+	public int getNumeroMatricula() {
+		return numeroMatricula;
 	}
 
-	public void setMatricula(int matricula) {
-		this.matricula = matricula;
+	public void setNumeroMatricula(int numeroMatricula) {
+		this.numeroMatricula = numeroMatricula;
 	}
 
 	public int getIdAluno() {

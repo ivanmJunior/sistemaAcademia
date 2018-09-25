@@ -11,7 +11,7 @@ public class Endereco {
 	private String cep;
 	private String numero;
 	private String complemento;
-	private int idPessoa;
+
 	
 	public int getIdcep() {
 		return id;
@@ -72,10 +72,5 @@ public class Endereco {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public int getIdPessoa() {
-		return idPessoa;
-	}
-	public void setIdPessoa(int idPessoa) {
-		this.idPessoa = idPessoa;
-	}
+
 }
