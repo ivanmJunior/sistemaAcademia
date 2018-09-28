@@ -25,7 +25,7 @@
       </div>
       <div class="row">
       	<div class="col-sm-2">
-      		<form class="navbar-form" action="<%=request.getContextPath()%>/WEB-INF/views/formClienteSistema.jsp">
+      		<form class="navbar-form" action="<%=request.getContextPath()%>/views/cadastrarClienteSistema.jsp">
       			<button type="submit" class="btn btn-outline-primary my-2 my-sm-3">Novo Cliente</button>
       		</form>
       	</div>

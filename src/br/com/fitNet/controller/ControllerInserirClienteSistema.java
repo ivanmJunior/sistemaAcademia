@@ -35,7 +35,7 @@ public class ControllerInserirClienteSistema extends HttpServlet {
 		c.setEmail(request.getParameter("txtEmail"));
 		c.setFone(request.getParameter("txtFone"));
 		c.setFone2(request.getParameter("txtCelular"));
-		c.setCpf(request.getParameter("txtCpf"));
+		c.setCpf(request.getParameter("txtCPF"));
 		c.setDataCadastro(new Date());
 		c.setDataNascimento(new Date());
 				

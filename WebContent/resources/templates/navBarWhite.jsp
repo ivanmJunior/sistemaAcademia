@@ -8,8 +8,6 @@
 	<nav class="my-2 my-md-0 mr-md-3">
 
 		<a class="p-2 text-dark" href="#">Empresa</a>
-		<a class="p-2 text-dark" href="<%=request.getContextPath()%>/views/produtos.jsp">Produtos</a>
-		<a class="p-2 text-dark" href="#">Serviços</a>
 		<a class="p-2 text-dark" href="#">Planos</a>
 	</nav>
 	<a class="btn btn-outline-primary" href="<%=request.getContextPath()%>/views/inscrevase.jsp">Inscreva-se</a> <a
