@@ -7,6 +7,7 @@ public class Acesso {
 	private int id;
 	private String usuario;
 	private String senha;
+	private String confirmarSenha;
 	private String statusAtivo = "S";
 	private String eliminado = "N";
 	private Date dataCadastro;
@@ -30,6 +31,12 @@ public class Acesso {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 	public String getStatusAtivo() {
 		return statusAtivo;

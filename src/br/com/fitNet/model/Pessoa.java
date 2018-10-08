@@ -1,6 +1,8 @@
 package br.com.fitNet.model;
 
-import java.util.Date;
+import java.util.Calendar;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public abstract class Pessoa{
 	
@@ -8,7 +10,10 @@ public abstract class Pessoa{
 	private String nome;
 	private String cpf;
 	private String rg;
-	private Date dataNascimento;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Calendar dataNascimento;
+	
 	private String sexo;
 	private String fone;
 	private String fone2;
@@ -22,6 +27,7 @@ public abstract class Pessoa{
 	private String Observacao;
 	private Acesso acesso = new Acesso();
 	private Endereco endereco = new Endereco();
+	
 	
 	public int getId() {
 		return id;
@@ -47,12 +53,7 @@ public abstract class Pessoa{
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -101,6 +102,12 @@ public abstract class Pessoa{
 	}
 	public void setiMC(double iMC) {
 		this.iMC = iMC;
+	}
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public boolean isEliminado() {
 		return eliminado;

@@ -1,59 +1,43 @@
 package br.com.fitNet.model;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Modalidade {
-
-	//private static int IDMODALIDADE = 1;
+	
 	private int idModalidade;
 	private String descricao;
-	private double valorPlano;
-	private double valorMensalista;
-	private double descontoMensalista;
-	private double descontoPlano;
-	private boolean statusModalidade;
-	private Date dataCadastro;
+	private double valor;
+	private boolean statusAtivo;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Calendar dataCadastro;
+	
 	private String observacao;
 	private Acesso acesso;
-	private int idAcesso;
-	private Date dataAlteracao;
-	private boolean modalidadeEliminada;
 	
-	public boolean isModalidadeEliminada() {
-		return modalidadeEliminada;
-	}
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Calendar dataAlteracao;
+	
+	private String eliminada;
 
-	public void setModalidadeEliminada(boolean modalidadeEliminada) {
-		this.modalidadeEliminada = modalidadeEliminada;
-	}
+	
+	public Modalidade(){
 
-	public Date getDataAlteracao() {
-		return dataAlteracao;
+		this.dataCadastro = new GregorianCalendar();
+		this.dataAlteracao = new GregorianCalendar();
+		this.acesso = new Acesso();
+		this.eliminada = "N";
 	}
-
-	public void setDataAlteracao(Date dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
-	}
-
-	public int getIdAcesso() {
-		return idAcesso;
-	}
-
-	public void setIdAcesso(int idAcesso) {
-		this.idAcesso = idAcesso;
-	}
-
+	
 	public Acesso getAcesso() {
 		return acesso;
 	}
 
 	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
-	}
-
-	public Modalidade(){
-		//this.idModalidade = IDMODALIDADE++; Usado na versão em BD
-		this.dataCadastro = new Date();
 	}
 	
 	public int getIdModalidade() {
@@ -69,75 +53,56 @@ public class Modalidade {
 		this.descricao = descricao;
 	}
 	public double getValor() {
-		return valorPlano;
+		return valor;
 	}
 	public void setValor(double valor) {
-		this.valorPlano = valor;
-	}
-
-	public boolean isStatusModalidade() {
-		return statusModalidade;
-	}
-
-	public void setStatus(boolean status) {
-		this.statusModalidade = status;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public double getValorPlano() {
-		return valorPlano;
-	}
-
-	public void setValorPlano(double valorPlano) {
-		this.valorPlano = valorPlano;
-	}
-
-	public double getValorMensalista() {
-		return valorMensalista;
-	}
-
-	public void setValorMensalista(double valorMensalista) {
-		this.valorMensalista = valorMensalista;
-	}
-
-	public double getDescontoMensalista() {
-		return descontoMensalista;
-	}
-
-	public void setDescontoMensalista(double descontoMensalista) {
-		this.descontoMensalista = descontoMensalista;
-	}
-
-	public double getDescontoPlano() {
-		return descontoPlano;
-	}
-
-	public void setDescontoPlano(double descontoPlano) {
-		this.descontoPlano = descontoPlano;
+		this.valor = valor;
 	}
 
 	public String getObservacao() {
 		return observacao;
 	}
 
-	/*public static int getIDMODALIDADE() {
-		return IDMODALIDADE;
-	}*/
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
 
+	public String getEliminada() {
+		return eliminada;
+	}
+
+	public void setEliminada(String eliminada) {
+		this.eliminada = eliminada;
+	}
+
+
+	public boolean isStatusAtivo() {
+		return statusAtivo;
+	}
+
+	public void setStatusAtivo(boolean statusAtivo) {
+		this.statusAtivo = statusAtivo;
+	}
+
+	public Calendar getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Calendar dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+
 	@Override
 	public String toString() {
-		return "Modalidade: " + idModalidade + " - " + descricao + " - Valor R$ " + valorPlano;
+		return "Modalidade: " + idModalidade + " - " + descricao + " - Valor R$ " + valor;
 	}
 	
 	

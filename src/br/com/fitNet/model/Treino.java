@@ -1,17 +1,29 @@
 package br.com.fitNet.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
-public class Treino {
+import org.springframework.format.annotation.DateTimeFormat;
 
+public class Treino {
+	
 	private Long id;
 	private Instrutor instrutor;
 	private Cliente cliente;
 	private Modalidade modalidade;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataDoAgendamento;
-	private Date dataTreino;
-	private Date horaInicio;
-	private Date horaTermino;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Calendar dataTreino;
+	
+	@DateTimeFormat(pattern="hh:mm")
+	private Calendar horaInicio;
+	
+	@DateTimeFormat(pattern="hh:mm")
+	private Calendar horaTermino;
+	
 	private String eliminado;
 	private String realizado;
 	private String observacao;
@@ -20,10 +32,10 @@ public class Treino {
 	public Treino(){
 		
 		this.instrutor = new Instrutor();
-		this.cliente = new Cliente();
+		//this.cliente = new Cliente();
 		this.modalidade = new Modalidade();
-		this.acesso = new Acesso();
-		this.dataDoAgendamento = new Date();
+		/*this.acesso = new Acesso();
+		this.dataDoAgendamento = new Date();*/
 	}
 	
 	public Long getId() {
@@ -56,22 +68,22 @@ public class Treino {
 	public void setDataDoAgendamento(Date dataDoAgendamento) {
 		this.dataDoAgendamento = dataDoAgendamento;
 	}
-	public Date getDataTreino() {
+	public Calendar getDataTreino() {
 		return dataTreino;
 	}
-	public void setDataTreino(Date dataTreino) {
+	public void setDataTreino(Calendar dataTreino) {
 		this.dataTreino = dataTreino;
 	}
-	public Date getHoraInicio() {
+	public Calendar getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(Calendar horaInicio) {
 		this.horaInicio = horaInicio;
 	}
-	public Date getHoraTermino() {
+	public Calendar getHoraTermino() {
 		return horaTermino;
 	}
-	public void setHoraTermino(Date horaTermino) {
+	public void setHoraTermino(Calendar horaTermino) {
 		this.horaTermino = horaTermino;
 	}
 	public String getEliminado() {

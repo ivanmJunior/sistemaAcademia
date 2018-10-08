@@ -1,7 +1,7 @@
 package br.com.fitNet.model.percistence;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import br.com.fitNet.model.Cliente;
@@ -12,29 +12,47 @@ import br.com.fitNet.model.percistence.Interfaces.IRepositorioCliente;
 
 public class ClienteDao implements IRepositorioCliente{
 
-	public static ArrayList<Cliente> LISTA_CLIENTE = new ArrayList<>();
+	public static Set<Cliente> LISTA_CLIENTE = new LinkedHashSet<>();
 	
 	@Override
 	public void incluir(Cliente cliente) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		LISTA_CLIENTE.add(cliente);
 	}
 
 	@Override
 	public void alterar(Cliente cliente) throws SQLException {
-		// TODO Auto-generated method stub
+
+		for(Cliente clienteDaLista : LISTA_CLIENTE){
+			if(clienteDaLista.getId() == cliente.getId()){
+				clienteDaLista.getAcesso().setSenha(cliente.getAcesso().getSenha());
+				clienteDaLista.setNome(cliente.getNome());
+				clienteDaLista.setCpf(cliente.getCpf());
+				clienteDaLista.setDataAlteracao(cliente.getDataAlteracao());
+				clienteDaLista.setDataNascimento(cliente.getDataNascimento());
+				clienteDaLista.setFone(cliente.getFone());
+				clienteDaLista.setFone2(cliente.getFone2());
+				clienteDaLista.setStatusAtivo(cliente.isStatusAtivo());
+				
+				LISTA_CLIENTE.add(clienteDaLista);
+			}
+		}
+	}
+
+	@Override
+	public void remover(Cliente cliente) throws SQLException {
+		
+		for(Cliente clienteDaConsulta : LISTA_CLIENTE){
+			if(clienteDaConsulta.getId() == clienteDaConsulta.getId()){
+				LISTA_CLIENTE.remove(clienteDaConsulta);
+				break;
+			}
+		}
 		
 	}
 
 	@Override
-	public void remover(int idAluno) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ArrayList<Cliente> consultar() throws SQLException {
-		// TODO Auto-generated method stub
+	public Set<Cliente> consultar() throws SQLException {
 		return LISTA_CLIENTE;
 	}
 
@@ -45,7 +63,7 @@ public class ClienteDao implements IRepositorioCliente{
 	}
 
 	@Override
-	public Set<Cliente> consultarAlunoParaPagamento() throws SQLException {
+	public Set<Cliente> consultarClienteParaPagamento() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -57,7 +75,7 @@ public class ClienteDao implements IRepositorioCliente{
 	}
 
 	@Override
-	public void incluirEnderecoAluno(Endereco endereco) throws SQLException {
+	public void incluirEnderecoCliente(Endereco endereco) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -87,19 +105,33 @@ public class ClienteDao implements IRepositorioCliente{
 	}
 
 	@Override
-	public Cliente consultarAlunoPorId(int idAluno) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public Cliente consultarClientePorId(int idCliente) throws SQLException {
+		Cliente clienteRetorno = null;
+		for(Cliente clienteDaConsulta : LISTA_CLIENTE){
+			if(clienteDaConsulta.getId() == idCliente){
+				clienteRetorno = clienteDaConsulta;
+			}
+		}
+		return clienteRetorno;
 	}
 
 	@Override
-	public Set<Cliente> consultarAlunosPorNome(String nome) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Cliente> consultarClientePorNome(String nome) throws SQLException {
+		Set<Cliente>clientesRetorno = new LinkedHashSet<>();
+			if(!nome.equals("")){
+			for(Cliente clienteDaConsulta : LISTA_CLIENTE){
+				if(clienteDaConsulta.getNome().contains(nome)){
+					clientesRetorno.add(clienteDaConsulta);
+				}
+			}
+			return clientesRetorno;
+		}else{
+			return LISTA_CLIENTE;
+		}
 	}
 
 	@Override
-	public Cliente consultarAlunoPorMatricula(int matricula) throws SQLException {
+	public Cliente consultarClientePorMatricula(int matricula) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -123,9 +155,10 @@ public class ClienteDao implements IRepositorioCliente{
 	}
 
 	@Override
-	public Set<String> consultarListaModalidadeAluno(int idContrato) throws SQLException {
+	public Set<String> consultarListaModalidadeCliente(int idContrato) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

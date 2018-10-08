@@ -1,35 +1,52 @@
 package br.com.fitNet.model.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
 import br.com.fitNet.model.Cliente;
 import br.com.fitNet.model.Endereco;
+import br.com.fitNet.model.exception.CPFInvalidoException;
 import br.com.fitNet.model.exception.ClienteInvalidoException;
+import br.com.fitNet.model.exception.NomeUsuarioInvalidoException;
 import br.com.fitNet.model.percistence.ClienteDao;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioCliente;
+import br.com.fitNet.util.ValidarCPF;
 
-
-public class RegrasClienteServeice{
+public class RegrasClienteServeice {
 
 	IRepositorioCliente repClienteDao = new ClienteDao();
-	
-	public void incluir(Cliente cliente) throws ClienteInvalidoException, SQLException{
-	
-		if(cliente.getAcesso().getUsuario().equals("")
-				|| cliente.getAcesso().getSenha().equals("")
-				|| cliente.getEmail().equals("")
-				|| cliente.getNome().equals(""))
-		{
-			throw new ClienteInvalidoException("Campos não podem ser vazio!");
-		}else{
-			repClienteDao.incluir(cliente);
+
+	public void incluir(Cliente cliente)
+			throws SQLException, ClienteInvalidoException, NomeUsuarioInvalidoException, CPFInvalidoException {
+
+		if (!ValidarCPF.validarCpf(cliente.getCpf())) {
+			throw new CPFInvalidoException("Numero de CPF invalido!");
+		} else {
+			if (cliente.getAcesso().getUsuario().equals("") || cliente.getAcesso().getSenha().equals("")
+					|| cliente.getEmail().equals("") || cliente.getNome().equals("")) {
+				throw new ClienteInvalidoException("Campos não podem ser vazio!");
+			} else {
+				Set<Cliente> listaClientes = consultar();
+				if (!listaClientes.isEmpty()) {
+					for (Cliente clienteDaLista : listaClientes) {
+						if (clienteDaLista.getCpf().equals(cliente.getCpf())) {
+							throw new ClienteInvalidoException("CPF já cadastrado para outro cliente!");
+						}
+						if (clienteDaLista.getAcesso().getUsuario().equals(cliente.getAcesso().getUsuario())) {
+							throw new NomeUsuarioInvalidoException("Nome de usário já existe. Tente outro!");
+						}
+					}
+					repClienteDao.incluir(cliente);
+
+				} else {
+					repClienteDao.incluir(cliente);
+				}
+			}
 		}
 	}
-	
+
 	public Integer getIdade(Date data) {
 		Calendar dataNascimento = Calendar.getInstance();
 		dataNascimento.setTime(data);
@@ -37,75 +54,70 @@ public class RegrasClienteServeice{
 		Integer diferencaMes = dataAtual.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
 		Integer diferencaDia = dataAtual.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
 		Integer idade = (dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
-		if(diferencaMes < 0	|| (diferencaMes == 0 && diferencaDia < 0)) {
+		if (diferencaMes < 0 || (diferencaMes == 0 && diferencaDia < 0)) {
 			idade--;
 		}
 		return idade;
 	}
-	
-	public void remover(int idCliente) throws NullPointerException, SQLException{
-			
-		if(idCliente <= 0)	
+
+	public void remover(Cliente cliente) throws NullPointerException, SQLException {
+
+		if (cliente.getId() <= 0)
 			throw new NullPointerException();
-		
-		repClienteDao.remover(idCliente);
+
+		repClienteDao.remover(cliente);
 	}
-	
-	public void alterar(Cliente Cliente) throws Exception{
-		//Cliente ClienteConsultado = consultarClientePorId(Cliente.getId());
+
+	public void alterar(Cliente Cliente) throws SQLException {
+
 		repClienteDao.alterar(Cliente);
-		
+
 	}
-	
-	public ArrayList<Cliente> consultar() throws SQLException{
-		ArrayList<Cliente> ClientesDaConsulta = null;
-		ClientesDaConsulta = repClienteDao.consultar();
-		return ClientesDaConsulta;
+
+	public Set<Cliente> consultar() throws SQLException {
+		return repClienteDao.consultar();
 	}
-	
+
 	public Endereco consultarEndereco(String cep) {
 		return null;
-		
-	}
-	
 
-	
+	}
+
 	public boolean verificarCliente(Cliente cliente) {
 		return false;
-		
+
 	}
-	
-	public int consultarUltimoIdCliente() throws SQLException{
+
+	public int consultarUltimoIdCliente() throws SQLException {
 		return repClienteDao.consultarAutoIncremento();
 	}
-	
-	public String carregarNumeroMatricula() throws SQLException{
+
+	public String carregarNumeroMatricula() throws SQLException {
 		return repClienteDao.gerarNumeroMatricula();
 	}
-	
-	public int carregarIdContrato() throws SQLException{
+
+	public int carregarIdContrato() throws SQLException {
 		return repClienteDao.consultarAutoIncrementoContrato();
 	}
-	
-	public Cliente consultarClientePorId(int idCliente) {
-		
-		
-		return null;
+
+	public Cliente consultarClientePorId(int idCliente) throws SQLException {
+
+		return repClienteDao.consultarClientePorId(idCliente);
 	}
-	
-	public Set<Cliente> consultarClientesPorNome(String nomeCliente) {
-		return null;
-		
+
+	public Set<Cliente> consultarClientesPorNome(String nomeCliente) throws SQLException {
+		return repClienteDao.consultarClientePorNome(nomeCliente);
+
 	}
-	
+
 	public Cliente consultarClientePorMatricula(int matricula) {
 		return null;
-		
+
 	}
-	
+
 	public Set<Cliente> consultarClienteParaPagamento() {
 		return null;
-		
+
 	}
 
 }
