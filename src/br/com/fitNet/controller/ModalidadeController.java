@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,8 @@ import br.com.fitNet.model.service.RegrasModalidadeServeice;
 public class ModalidadeController {
 	static int ID = 1; //provisório. Apenas para testes.
 	
-	RegrasModalidadeServeice regraModalidade = new RegrasModalidadeServeice();
+	@Autowired
+	RegrasModalidadeServeice regraModalidade;
 	
 	@RequestMapping("novaModalidade")
 	public String execNovaModalidades(){

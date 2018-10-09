@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,9 @@ public class ClienteController {
 
 	static int ID = 0; //Provisório, apenas para testes.
 	Mensagens msg = new Mensagens();
-	RegrasClienteServeice regraCliente = new RegrasClienteServeice();
+	
+	@Autowired
+	RegrasClienteServeice regraCliente;
 	
 	@RequestMapping("adicionaClientes")
 	public String execInserirCliente(Cliente cliente){

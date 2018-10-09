@@ -3,12 +3,14 @@ package br.com.fitNet.model.service;
 import java.sql.SQLException;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import br.com.fitNet.model.Modalidade;
 import br.com.fitNet.model.exception.ClienteInvalidoException;
 import br.com.fitNet.model.percistence.ModalidadeDao;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioModalidade;
 
-
+@Service
 public class RegrasModalidadeServeice{
 
 	IRepositorioModalidade repModalidadeDao = new ModalidadeDao();

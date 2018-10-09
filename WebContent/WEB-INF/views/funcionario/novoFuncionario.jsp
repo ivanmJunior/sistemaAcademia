@@ -19,59 +19,29 @@
 	    <div class="container">
 	      <h1 class="mt-5">Cadastrar Novo Cliente</h1>
 	      
-	     <form class="needs-validation" action="<%=request.getContextPath()%>/editarCliente?id=${cliente.id}" method="post">
-		  <div class="form-row">
-		    <div class="col-md-2 mb-3">
-		      <label >Código</label>
-		      <label class="form-control">${cliente.id}</label>
-		    </div>
-		   <div class="col-md-2 mb-3">
-		      <label>Matricula</label>
-		       <label class="form-control">${cliente.matricula.numeroMatricula}</label>
-		    </div>
-		      <div class="col-md-4 mb-3">
-                  <label for="exampleInputBirth">Data Cadastro</label>
-                   <label class="form-control">
-                   		<fmt:formatDate value="${cliente.dataCadastro.time}" pattern="dd/MM/yyyy"/>
-                   </label>
-		      </div>
-		      <div class="col-md-4 mb-3">
-                  <label for="exampleInputBirth">Data Alteração</label>
-                  <label class="form-control">
-                  		<fmt:formatDate value="${cliente.dataAlteracao.time}" pattern="dd/MM/yyyy"/>
-                  </label>
-    	     </div>
-		  </div>
+	     <form class="needs-validation" action="<%=request.getContextPath()%>/adicionaClientes" method="post">
 		  <div class="form-row">
 		    <div class="col-md-4 mb-3">
 		      <label for="validationCustom01">Nome</label>
-		      <input type="text" min="10" name="nome" value="${cliente.nome}" 
-		      class="form-control" id="validationCustom01" placeholder="Nome Completo" required>
-		      <div class="valid-feedback">
-		        OK!
-		      </div>
+		      <input type="text" min="10" name="nome" class="form-control" 
+		      id="validationCustom01" placeholder="Informe o Nome" required>
 		    </div>
 		   <div class="col-md-4 mb-3">
 		      <label for="validationCustom02">Email</label>
-		      <input type="email" name="email" value="${cliente.email}"
-		      class="form-control" id="validationCustom02" placeholder="Email" required>
+		      <input type="email" name="email" class="form-control" 
+		      id="validationCustom02" placeholder="Email" required>
 		      <div class="invalid-feedback">
 		        Por favor informe o email.
 		      </div>
 		    </div>
 		      <div class="col-md-2 mb-3">
-                  <label for="validationDataNascimento">Data Nascimento</label>
-                  <input type="date" name="dataNascimento" 
-                  class="form-control" id="validationDataNascimento"
-                    value="<fmt:formatDate value="${cliente.dataNascimento.time}" pattern="yyyy-MM-dd"/>">
+                  <label for="exampleInputBirth">Data de Nascimento</label>
+                  <input type="date" class="form-control" id="exampleInputBirth" name="dataNascimento">
             </div>
-             <div class="valid-feedback">
-		        OK!
-		    </div>
 		    <div class="col-md-2 mb-3">
-		      <label for="validationCPF">CPF</label>
-		      <input type="text" min="11" maxlength="11" name="cpf" value="${cliente.cpf}"
-		      class="form-control" id="validationCPF" placeholder="Apenas Números" required="required">
+		      <label for="validationCustom13">CPF</label>
+		      <input type="text" min="11" max="11" name="cpf" 
+		      class="form-control" id="validationCustom13" placeholder="Apenas Números" required="required">
 		      <div class="invalid-feedback">
 		      	Por favor informe um Número de CPF.
 		     </div>
@@ -84,7 +54,7 @@
 		        <div class="input-group-prepend">
 		          <span class="input-group-text" id="inputGroupPrepend">@</span>
 		        </div>
-		        <input type="text" min="6" name="acesso.usuario" value="${cliente.acesso.usuario}"
+		        <input type="text" min="6" name="acesso.usuario" 
 		        class="form-control" id="validationCustomUsername" placeholder="Usuário" 
 		        aria-describedby="inputGroupPrepend" required>
 		        <div class="invalid-feedback">
@@ -94,14 +64,15 @@
 		    </div> 
 		    <div class="col-md-4 mb-3">
 			      <label for="validationCustom04">Senha</label>
-			      <input type="password" min="6" name="acesso.senha" value="${cliente.acesso.senha}" class="form-control" id="validationCustom04" placeholder="Senha" required>
+			      <input type="password" min="6" name="acesso.senha" 
+			      class="form-control" id="validationCustom04" placeholder="Senha" required>
 			      <div class="invalid-feedback">
 			        Por favor informe a senha.
 		      </div>
 		    </div>
 		    <div class="col-md-4 mb-3">
 			      <label for="validationCustom11">Confirmar Senha</label>
-			      <input type="password" min="6" name="acesso.confirmarSenha" value="${cliente.acesso.confirmarSenha}"
+			      <input type="password" min="6" name="acesso.confirmarSenha" 
 			      class="form-control" id="validationCustom11" placeholder="Confirme Senha" required>
 			      <div class="invalid-feedback">
 			        Por favor informe novamente senha.
@@ -111,30 +82,26 @@
 		    <div class="form-row">
 			    <div class="col-md-4 mb-3">
 				      <label for="validationCustom05">Endereço</label>
-				      <input type="text" name="endereco.logradouro" value="${cliente.endereco.logradouro}"
-				      class="form-control" id="validationCustom05" placeholder="Rua">
+				      <input type="text" name="endereco.logradouro" class="form-control" id="validationCustom05" placeholder="Rua">
 				      <div class="invalid-feedback">
 				        Por favor informe a rua e o numero.
 			      	 </div>
 			    </div>
 			    <div class="col-md-2 mb-3">
 				      <label for="validationCustom06">Número</label>
-				      <input type="number" name="endereco.numero" value="${cliente.endereco.numero}"
-				      class="form-control" id="validationCustom06" placeholder="Numero">
+				      <input type="number" name="endereco.numero" class="form-control" id="validationCustom06" placeholder="Numero">
 				      <div class="invalid-feedback">
 				        Por favor informe a rua e o numero.
 			      	 </div>
 			    </div>
 			    <div class="col-md-2 mb-3">
 		      		<label for="validationCustom07">Complemento</label>
-		      		<input type="text" name="endereco.complemento" value="${cliente.endereco.complemento}"
-		      		class="form-control" id="validationCustom07" placeholder="Ex.: casa">
+		      		<input type="text" name="endereco.complemento" class="form-control" id="validationCustom07" placeholder="Ex.: casa">
 		    	</div> 
 		    
 		    	<div class="col-md-4 mb-3">
 			      <label for="validationCustom08">Bairro</label>
-			      <input type="text" name="endereco.bairro" value="${cliente.endereco.bairro}"
-			      class="form-control" id="validationCustom08" placeholder="bairro">
+			      <input type="text" name="endereco.bairro" class="form-control" id="validationCustom08" placeholder="bairro">
 			      <div class="invalid-feedback">
 			        Por favor informe a rua e o numero.
 		      	 </div>
@@ -143,8 +110,7 @@
 		    <div class="form-row">
 		    <div class="col-md-4 mb-3">
 		      <label for="validationCustom09">Cidade</label>
-		      <input type="text" name="endereco.cidade" value="${cliente.endereco.cidade}"
-		      class="form-control" id="validationCustom09" placeholder="Cidade">
+		      <input type="text" name="endereco.cidade" class="form-control" id="validationCustom09" placeholder="Cidade">
 		      <div class="invalid-feedback">
 		        Por favor informe a Cidade.
 		      </div>
@@ -152,7 +118,7 @@
 		    <div class="col-md-4 mb-3">
                   <label for="exampleInputCountry">Estado</label>
                   <select class="form-control" id="exampleInputCountry" name="endereco.uf">
-                    <option value="${cliente.endereco.uf}" selected="selected">${cliente.endereco.uf}</option>
+                    <option value="" selected="selected">Selecione um estado</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapa</option>
@@ -184,24 +150,21 @@
                 </div>
 		    <div class="col-md-4 mb-3">
 		      <label for="validationCustom10">CEP</label>
-		      <input type="text" min="9" max="9" name="endereco.cep" value="${cliente.endereco.cep}"
-		      class="form-control" id="validationCustom10" placeholder="Ex.: 00000-000">
+		      <input type="text" name="endereco.cep" class="form-control" id="validationCustom10" placeholder="00000-000">
 		      <div class="invalid-feedback">
 		        Por favor informe um CEP.
 		      </div>
 		    </div>
 		     <div class="col-md-3 mb-3">
 		      <label for="validationCustom12">Fone</label>
-		      <input type="text" name="fone" value="${cliente.fone}"
-		      class="form-control" id="validationCustom12"  placeholder="(000) 9999-9999">
+		      <input type="text" name="fone" class="form-control" id="validationCustom12" placeholder="DDD 9999-9999">
 		      <div class="invalid-feedback">
 		        Por favor informe um Número para contato.
 		      </div>
 		    </div>
 		    <div class="col-md-3 mb-3">
 		      <label for="validationCustom14">Celular</label>
-		      <input type="text" name="fone2" value="${cliente.fone2}"
-		      class="form-control" id="validationCustom14" placeholder="(000) 9 9999-9999" required>
+		      <input type="text" name="fone2" class="form-control" id="validationCustom14" placeholder="DDD 9 9999-9999" required>
 		      <div class="invalid-feedback">
 		        Por favor informe um Número para contato.
 		      </div>
@@ -210,8 +173,7 @@
 		  </div>
 		  <div class="form-group">
 		    <div class="form-check">
-		      <input class="form-check-input" name="statusAtivo" type="checkbox" id="invalidCheck"
-			    value="${cliente.statusAtivo}"	${cliente.statusAtivo?	'checked'	:	''	}>
+		      <input class="form-check-input" name="statusAtivo" type="checkbox" id="invalidCheck" checked="checked" required>
 		      <label class="form-check-label" for="invalidCheck">
 		        Ativo
 		      </label>
@@ -227,7 +189,6 @@
 		
     	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-    	<script src="<%=request.getContextPath()%>/resources/js/maskCpfCnpj.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/validaFormClienteUser.js"></script>
 	</body>
 </html>
