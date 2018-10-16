@@ -1,5 +1,5 @@
-var password = document.getElementById("validationCustom04")
-  , confirm_password = document.getElementById("validationCustom11");
+var password = document.querySelector('#validationSenha')
+  , confirm_password = document.querySelector('#validationConfirmarSenha');
 
 function validatePassword(){
   if(password.value != confirm_password.value) {

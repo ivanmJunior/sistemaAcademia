@@ -8,6 +8,7 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link " href="<%=request.getContextPath()%>/principalSistema">Principal</a></li>
 			<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#"
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -19,7 +20,7 @@
 						href="<%=request.getContextPath()%>/listarClientes">Clientes</a> <a
 						class="dropdown-item"
 						href="<%=request.getContextPath()%>/listarModalidades">Modalidades</a>
-					<a class="dropdown-item" href="#">Funcionários</a> <a
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/listarFuncionarios">Funcionários</a> <a
 						class="dropdown-item" href="#">Planos</a>
 				</div></li>
 		</ul>

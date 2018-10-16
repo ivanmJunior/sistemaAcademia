@@ -5,6 +5,11 @@ public class Mensagens {
 	private String  mensagemSucesso;
 	private String  mensagemErro;
 
+	public Mensagens(){
+		this.mensagemSucesso = "";
+		this.mensagemErro = "";
+	}
+	
 	public String getMensagemSucesso() {
 		return mensagemSucesso;
 	}

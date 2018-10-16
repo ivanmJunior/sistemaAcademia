@@ -101,41 +101,42 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					<form class="needs-validation"
+				<div class="modal-body" >
+					<form class="needs-validation" novalidate
 						action="<%=request.getContextPath()%>/adicionaClientesUsuario"
 						method="post">
-						<div class="form-row">
+						<div class="form-row" >
 							<div class="col-md-12 mb-2">
-								<label for="validationCustom01">Nome</label> 
+								<label for="validationNome">Nome</label> 
 								<input  type="text" min="10"
-									name="nome" class="form-control" id="validationCustom01"
+									name="nome" class="form-control" id="validationNome"
 									placeholder="Nome cmopleto" required >
-								<div class="valid-feedback">OK!</div>
+								<div class="invalid-feedback">Informe o Nome</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12 mb-2">
-								<label for="validationCustom02">Email</label> <input type="email"
-									name="email" class="form-control" id="validationCustom02"
+								<label for="validationEmail">Email</label> <input type="email"
+									name="email" class="form-control" id="validationEmail"
 									placeholder="Email" required autofocus>
-								<div class="invalid-feedback">Por favor informe o email.</div>
+								<div class="invalid-feedback">Informe o email.</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12 mb-2">
-								<label for="exampleInputBirth">Data de Nascimento</label> <input
-									type="date" class="form-control" id="exampleInputBirth"
+								<label for="InputBirthdataNascimento">Data de Nascimento</label> <input
+									type="date" class="form-control" id="InputBirthdataNascimento"
 									name="dataNascimento">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12 mb-2">
 								<label for="validationCPF">CPF</label> <input type="text"
-									name="cpf" class="form-control" id="validationCPF"
+									name="cpf" minLenght="11" class="form-control" id="validationCPF"
 									placeholder="Apenas Números" required="required">
-								<div class="invalid-feedback">Por favor informe um Número
-									de CPF.</div>
+									
+								<div class="invalid-feedback">Informe um Número	de CPF Válido.</div>
+								
 							</div>
 						</div>
 						<div class="form-row">
@@ -148,27 +149,25 @@
 									<input type="text" min="6" name="acesso.usuario" class="form-control"
 										id="validationCustomUsername" placeholder="Usuário"
 										aria-describedby="inputGroupPrepend" required>
-									<div class="invalid-feedback">Por favor informe um nome
-										de usuário.</div>
+									<div class="invalid-feedback">Informe um nome de usuário.</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12 mb-2">
-								<label for="validationCustom04">Senha</label> <input
-									type="password" min="6" name="acesso.senha" class="form-control"
-									id="validationCustom04" placeholder="Senha" required>
-								<div class="invalid-feedback">Por favor informe a senha.</div>
+								<label for="validationSenha">Senha</label> <input
+									type="password" minLenght="6" name="acesso.senha" class="form-control"
+									id="validationSenha" placeholder="Senha" required>
+								<div class="invalid-feedback">Por Favor redefina as Senhas.</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12 mb-2">
-								<label for="validationCustom11">Confirmar Senha</label> <input
-									type="password" name="acesso.confirmarSenha"
-									class="form-control" id="validationCustom11"
+								<label for="validationConfirmarSenha">Confirmar Senha</label> <input
+									type="password" minLenght="6" name="acesso.confirmarSenha"
+									class="form-control" id="validationConfirmarSenha"
 									placeholder="Confirme Senha" required>
-								<div class="invalid-feedback">Por favor informe novamente
-									senha.</div>
+								<div class="invalid-feedback">Por Favor redefina as Senhas. Minimo 6 digitos.</div>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -183,12 +182,12 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script	src="<%=request.getContextPath()%>/resources/js/validaCPF.js"></script>
+	
 	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-	<script	src="<%=request.getContextPath()%>/resources/js/validaFormClienteUser.js"></script>
 	<script	src="<%=request.getContextPath()%>/resources/js/verificarSenhas.js"></script>
-	
+	<script	src="<%=request.getContextPath()%>/resources/js/validarCpf.js"></script>
+	<script	src="<%=request.getContextPath()%>/resources/js/validaFormClienteUser.js"></script>
 
 </body>
 </html>

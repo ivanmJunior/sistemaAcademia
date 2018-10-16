@@ -25,4 +25,9 @@ public class HomeController {
 	public String executarInscrevase() {
 		return "cliente/inscrevase";
 	}
+	
+	@RequestMapping("principalSistema")
+	public String execEfetuarLogin(){
+		return "/logadoSistema";
+	}
 }

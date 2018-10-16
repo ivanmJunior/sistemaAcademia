@@ -3,11 +3,13 @@ package br.com.fitNet.model.service;
 import java.sql.SQLException;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import br.com.fitNet.model.Treino;
 import br.com.fitNet.model.exception.TreinoInvalidoException;
 import br.com.fitNet.model.percistence.TreinoDao;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioTreino;
-
+@Service
 public class RegrasTreinoServeice{
 
 	IRepositorioTreino repTreinoDao = new TreinoDao();

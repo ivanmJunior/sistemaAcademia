@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="ISO-8859-1">
-    <link rel="icon" href="<%=request.getContextPath()%>/imagem/Logo21x21.ico">
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/imagem/Logo21x21.ico">
     <link href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/css/sticky-footer-navbar.css" rel="stylesheet">
    
@@ -19,31 +19,34 @@
 	    <div class="container">
 	      <h1 class="mt-5">Cadastrar Novo Cliente</h1>
 	      
-	     <form class="needs-validation" action="<%=request.getContextPath()%>/adicionaClientes" method="post">
+	     <form class="needs-validation" novalidate action="<%=request.getContextPath()%>/adicionaClientes" method="post">
 		  <div class="form-row">
 		    <div class="col-md-4 mb-3">
-		      <label for="validationCustom01">Nome</label>
+		      <label for="validationNome">Nome</label>
 		      <input type="text" min="10" name="nome" class="form-control" 
-		      id="validationCustom01" placeholder="Informe o Nome" required>
+		      id="validationNome" placeholder="Nome Completo" required>
+		      <div class="invalid-feedback">
+		        Informe o Nome.
+		      </div>
 		    </div>
 		   <div class="col-md-4 mb-3">
-		      <label for="validationCustom02">Email</label>
+		      <label for="validationEmail">Email</label>
 		      <input type="email" name="email" class="form-control" 
-		      id="validationCustom02" placeholder="Email" required>
+		      id="validationEmail" placeholder="Email" required>
 		      <div class="invalid-feedback">
-		        Por favor informe o email.
+		        Informe o email.
 		      </div>
 		    </div>
 		      <div class="col-md-2 mb-3">
-                  <label for="exampleInputBirth">Data de Nascimento</label>
-                  <input type="date" class="form-control" id="exampleInputBirth" name="dataNascimento">
+                  <label for="InputBirthdataNascimento">Data de Nascimento</label>
+                  <input type="date" class="form-control" id="InputBirthdataNascimento" name="dataNascimento">
             </div>
 		    <div class="col-md-2 mb-3">
-		      <label for="validationCustom13">CPF</label>
+		      <label for="validationCPF">CPF</label>
 		      <input type="text" min="11" max="11" name="cpf" 
-		      class="form-control" id="validationCustom13" placeholder="Apenas Números" required="required">
+		      class="form-control" id="validationCPF" placeholder="99999999999" required>
 		      <div class="invalid-feedback">
-		      	Por favor informe um Número de CPF.
+		      	Informe um Número de CPF.
 		     </div>
 		    </div>
 		  </div>
@@ -58,66 +61,58 @@
 		        class="form-control" id="validationCustomUsername" placeholder="Usuário" 
 		        aria-describedby="inputGroupPrepend" required>
 		        <div class="invalid-feedback">
-		          Por favor informe um nome de usuário.
+		          Informe usuário minimo 6 digitos.
 		        </div>
 		      </div>
 		    </div> 
 		    <div class="col-md-4 mb-3">
-			      <label for="validationCustom04">Senha</label>
+			      <label for="validationSenha">Senha</label>
 			      <input type="password" min="6" name="acesso.senha" 
-			      class="form-control" id="validationCustom04" placeholder="Senha" required>
+			      class="form-control" id="validationSenha" placeholder="Minimo 6 digitos" required>
 			      <div class="invalid-feedback">
-			        Por favor informe a senha.
+			        Informe a senha.
 		      </div>
 		    </div>
 		    <div class="col-md-4 mb-3">
-			      <label for="validationCustom11">Confirmar Senha</label>
+			      <label for="validationConfirmarSenha">Confirmar Senha</label>
 			      <input type="password" min="6" name="acesso.confirmarSenha" 
-			      class="form-control" id="validationCustom11" placeholder="Confirme Senha" required>
+			      class="form-control" id="validationConfirmaSenha" placeholder="Minimo 6 digitos" required>
 			      <div class="invalid-feedback">
-			        Por favor informe novamente senha.
+			        Informe novamente senha.
 		      </div>
 		    </div>
 		    </div>
 		    <div class="form-row">
 			    <div class="col-md-4 mb-3">
-				      <label for="validationCustom05">Endereço</label>
-				      <input type="text" name="endereco.logradouro" class="form-control" id="validationCustom05" placeholder="Rua">
-				      <div class="invalid-feedback">
-				        Por favor informe a rua e o numero.
-			      	 </div>
+				      <label for="validationEndereço">Endereço</label>
+				      <input type="text" name="endereco.logradouro" class="form-control"
+				      id="validationEndereço" placeholder="Rua">
 			    </div>
 			    <div class="col-md-2 mb-3">
-				      <label for="validationCustom06">Número</label>
-				      <input type="number" name="endereco.numero" class="form-control" id="validationCustom06" placeholder="Numero">
-				      <div class="invalid-feedback">
-				        Por favor informe a rua e o numero.
-			      	 </div>
+				      <label for="validationNumero">Número</label>
+				      <input type="number" name="endereco.numero" class="form-control" 
+				      id="validationNumero" placeholder="Numero">
 			    </div>
 			    <div class="col-md-2 mb-3">
-		      		<label for="validationCustom07">Complemento</label>
-		      		<input type="text" name="endereco.complemento" class="form-control" id="validationCustom07" placeholder="Ex.: casa">
+		      		<label for="validationComplemento">Complemento</label>
+		      		<input type="text" name="endereco.complemento" class="form-control" 
+		      		id="validationComplemento" placeholder="Ex.: casa">
 		    	</div> 
-		    
 		    	<div class="col-md-4 mb-3">
-			      <label for="validationCustom08">Bairro</label>
-			      <input type="text" name="endereco.bairro" class="form-control" id="validationCustom08" placeholder="bairro">
-			      <div class="invalid-feedback">
-			        Por favor informe a rua e o numero.
-		      	 </div>
+			      <label for="validationBairro">Bairro</label>
+			      <input type="text" name="endereco.bairro" class="form-control" 
+			      id="validationBairro" placeholder="Bairro">
 		      </div>
 		    </div>
 		    <div class="form-row">
 		    <div class="col-md-4 mb-3">
-		      <label for="validationCustom09">Cidade</label>
-		      <input type="text" name="endereco.cidade" class="form-control" id="validationCustom09" placeholder="Cidade">
-		      <div class="invalid-feedback">
-		        Por favor informe a Cidade.
-		      </div>
+		      <label for="validationCidade">Cidade</label>
+		      <input type="text" name="endereco.cidade" class="form-control" 
+		      id="validationCidade" placeholder="Cidade">
 		    </div>
 		    <div class="col-md-4 mb-3">
-                  <label for="exampleInputCountry">Estado</label>
-                  <select class="form-control" id="exampleInputCountry" name="endereco.uf">
+                  <label for="InputCountryUF">Estado</label>
+                  <select class="form-control" id="InputCountryUF" name="endereco.uf">
                     <option value="" selected="selected">Selecione um estado</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
@@ -149,27 +144,23 @@
                   </select>
                 </div>
 		    <div class="col-md-4 mb-3">
-		      <label for="validationCustom10">CEP</label>
-		      <input type="text" name="endereco.cep" class="form-control" id="validationCustom10" placeholder="00000-000">
-		      <div class="invalid-feedback">
-		        Por favor informe um CEP.
-		      </div>
+		      <label for="validationCEP">CEP</label>
+		      <input type="text" name="endereco.cep" class="form-control" 
+		      id="validationCEP" placeholder="00000-000">
 		    </div>
 		     <div class="col-md-3 mb-3">
-		      <label for="validationCustom12">Fone</label>
-		      <input type="text" name="fone" class="form-control" id="validationCustom12" placeholder="DDD 9999-9999">
-		      <div class="invalid-feedback">
-		        Por favor informe um Número para contato.
-		      </div>
+		      <label for="validationFone">Fone</label>
+		      <input type="text" name="fone" class="form-control" 
+		      id="validationFone" placeholder="DDD 9999-9999">
 		    </div>
 		    <div class="col-md-3 mb-3">
-		      <label for="validationCustom14">Celular</label>
-		      <input type="text" name="fone2" class="form-control" id="validationCustom14" placeholder="DDD 9 9999-9999" required>
+		      <label for="validationCelular">Celular</label>
+		      <input type="text" name="fone2" class="form-control" 
+		      id="validationCelular" placeholder="DDD 9 9999-9999" required>
 		      <div class="invalid-feedback">
-		        Por favor informe um Número para contato.
+		        Informe um Número para contato.
 		      </div>
 		    </div>
-
 		  </div>
 		  <div class="form-group">
 		    <div class="form-check">
@@ -177,7 +168,6 @@
 		      <label class="form-check-label" for="invalidCheck">
 		        Ativo
 		      </label>
-
 		    </div>
 		  </div>
 		  <button class="btn btn-primary" type="submit">Salvar</button>
@@ -187,6 +177,7 @@
 		
 		<jsp:include page="/WEB-INF/views/templates/rodapeDark.jsp"></jsp:include>
 		
+		<script	src="<%=request.getContextPath()%>/resources/js/verificarSenhas.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/validaFormClienteUser.js"></script>

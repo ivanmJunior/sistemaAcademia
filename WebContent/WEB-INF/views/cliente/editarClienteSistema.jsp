@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="ISO-8859-1">
-    <link rel="icon" href="<%=request.getContextPath()%>/imagem/Logo21x21.ico">
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/imagem/Logo21x21.ico">
     <link href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/css/sticky-footer-navbar.css" rel="stylesheet">
    
@@ -19,7 +19,7 @@
 	    <div class="container">
 	      <h1 class="mt-5">Cadastrar Novo Cliente</h1>
 	      
-	     <form class="needs-validation" action="<%=request.getContextPath()%>/editarCliente?id=${cliente.id}" method="post">
+	     <form class="needs-validation" novalidate action="<%=request.getContextPath()%>/editarCliente?id=${cliente.id}" method="post">
 		  <div class="form-row">
 		    <div class="col-md-2 mb-3">
 		      <label >Código</label>
@@ -93,16 +93,16 @@
 		      </div>
 		    </div> 
 		    <div class="col-md-4 mb-3">
-			      <label for="validationCustom04">Senha</label>
-			      <input type="password" min="6" name="acesso.senha" value="${cliente.acesso.senha}" class="form-control" id="validationCustom04" placeholder="Senha" required>
+			      <label for="validationSenha">Senha</label>
+			      <input type="password" min="6" name="acesso.senha" value="${cliente.acesso.senha}" class="form-control" id="validationSenha" placeholder="Senha" required>
 			      <div class="invalid-feedback">
 			        Por favor informe a senha.
 		      </div>
 		    </div>
 		    <div class="col-md-4 mb-3">
-			      <label for="validationCustom11">Confirmar Senha</label>
+			      <label for="validationConfirmarSenha">Confirmar Senha</label>
 			      <input type="password" min="6" name="acesso.confirmarSenha" value="${cliente.acesso.confirmarSenha}"
-			      class="form-control" id="validationCustom11" placeholder="Confirme Senha" required>
+			      class="form-control" id="validationConfirmarSenha" placeholder="Confirme Senha" required>
 			      <div class="invalid-feedback">
 			        Por favor informe novamente senha.
 		      </div>
@@ -225,6 +225,7 @@
 		
 		<jsp:include page="/WEB-INF/views/templates/rodapeDark.jsp"></jsp:include>
 		
+		<script	src="<%=request.getContextPath()%>/resources/js/verificarSenhas.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
     	<script src="<%=request.getContextPath()%>/resources/js/maskCpfCnpj.js"></script>

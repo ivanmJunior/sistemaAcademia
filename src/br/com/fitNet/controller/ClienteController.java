@@ -15,6 +15,7 @@ import br.com.fitNet.model.Cliente;
 import br.com.fitNet.model.exception.CPFInvalidoException;
 import br.com.fitNet.model.exception.ClienteInvalidoException;
 import br.com.fitNet.model.exception.NomeUsuarioInvalidoException;
+import br.com.fitNet.model.exception.SenhaInvalidaException;
 import br.com.fitNet.model.service.RegrasClienteServeice;
 import br.com.fitNet.util.Mensagens;
 
@@ -27,21 +28,28 @@ public class ClienteController {
 	@Autowired
 	RegrasClienteServeice regraCliente;
 	
+	@RequestMapping("areaDoCLiente")
+	public String efetuarLoginCliente() {
+		return "cliente/areaDoCliente";
+	}
+	
 	@RequestMapping("adicionaClientes")
 	public String execInserirCliente(Cliente cliente){
 		ID++;
 		cliente.setId(ID);
 		cliente.getDataCadastro().setTime(new Date());
 		cliente.getDataAlteracao().setTime(new Date());
+		cliente.setNome(cliente.getNome().toUpperCase());
 		//criando provisóriamente a matricula
 		String matricula = ID +""+cliente.getDataCadastro().get(Calendar.YEAR);
 		cliente.getMatricula().setNumeroMatricula(Integer.parseInt(matricula));
 		
 		try {
 			regraCliente.incluir(cliente);
-		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
-			
+		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException | SenhaInvalidaException e) {
+			msg.setMensagemErro("Erro ao cadastrar! "+e.getMessage());
 			e.printStackTrace();
+			return "redirect:mostraMensagemCliente";
 		}
 		return "redirect:listarClientes";
 	}
@@ -79,14 +87,14 @@ public class ClienteController {
 		try {
 			regraCliente.incluir(cliente);
 			msg.setMensagemSucesso("Secesso! Seja Bem Vindo!");
-		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
-			msg.setMensagemErro("Erro ao cadastrar! Erro: "+e.getMessage());
+		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException | SenhaInvalidaException e) {
+			msg.setMensagemErro("Erro ao cadastrar! "+e.getMessage());
 			e.printStackTrace();
 		}
-		return "redirect:mostraMensagem";
+		return "redirect:mostraMensagemCliente";
 	}
 	
-	@RequestMapping("mostraMensagem")
+	@RequestMapping("mostraMensagemCliente")
 	public ModelAndView execMensagens(){
 		String paginaMensagem = "";
 		
@@ -108,8 +116,9 @@ public class ClienteController {
 		try {
 			regraCliente.remover(cliente);
 		} catch (SQLException e) {
-			
+			msg.setMensagemErro("Erro ao remover! "+e.getMessage());
 			e.printStackTrace();
+			return "redirect:mostraMensagemCliente";
 		}
 		
 		return "redirect:listarClientes";
@@ -123,8 +132,9 @@ public class ClienteController {
 			clienteDaConsulta.getDataAlteracao().setTime(new Date());
 			modelo.addAttribute("cliente", clienteDaConsulta);
 		} catch (SQLException e) {
-			
+			msg.setMensagemErro("Erro! "+e.getMessage());
 			e.printStackTrace();
+			return "redirect:mostraMensagemCliente";
 		}
 		
 		return "cliente/editarClienteSistema";
@@ -137,8 +147,9 @@ public class ClienteController {
 			cliente.setNome(cliente.getNome().toUpperCase());
 			regraCliente.alterar(cliente);
 			} catch (Exception e) {
-
+				msg.setMensagemErro("Erro! "+e.getMessage());
 				e.printStackTrace();
+				return "redirect:mostraMensagemCliente";
 			}
 		return "redirect:listarClientes";
 	}
@@ -151,8 +162,9 @@ public class ClienteController {
 			Set<Cliente>listaClientes = regraCliente.consultarClientesPorNome(nome);
 			modelo.addAttribute("clientes", listaClientes);
 		} catch (SQLException e) {
-			
+			msg.setMensagemErro("Erro! "+e.getMessage());
 			e.printStackTrace();
+			return "redirect:mostraMensagemCliente";
 		}
 		
 		return "cliente/clientes";

@@ -1,14 +1,15 @@
-$("#validationCPF").keydown(function(){
+var cpf = document.querySelector('#validationCPF').value;
+$(cpf).keydown(function(){
     try {
-        $("#validationCPF").unmask();
+        $(cpf).unmask();
     } catch (e) {}
 
-    var tamanho = $("#validationCPF").val().length;
+    var tamanho = $(cpf).val().length;
 
     if(tamanho < 11){
-        $("#validationCPF").mask("999.999.999-99");
+        $(cpf).mask("999.999.999-99");
     } else if(tamanho >= 11){
-        $("#validationCPF").mask("99.999.999/9999-99");
+        $(cpf).mask("99.999.999/9999-99");
     }
 
     // ajustando foco

@@ -20,32 +20,32 @@
 		<div class="container">
 			<h2 class="mt-5">Cadastrar Nova Modalidade</h2>
 		
-		<div class="ccol-md-6 mb-3">
+		<div class="col-md-6 mb-3">
 		
         <form class="needs-validation" novalidate action="<%=request.getContextPath()%>/adicionaModalidades" method="post">
 		  
 		  <div class="form-row">
 		    <div class="col-md-6 mb-3">
-		      <label for="validationCustom01">Descrição</label>
-		      <input type="text" name="descricao"  class="form-control" id="validationCustom01" placeholder="Descrição" required>
-		      <div class="valid-feedback">
-		        Ok!
+		      <label for="validationDescricao">Descrição</label>
+		      <input type="text" name="descricao"  class="form-control" id="validationDescricao" placeholder="Descrição" required>
+		      <div class="invalid-feedback">
+		        Informe a Modalidade.
 		      </div>
 		    </div>
 		    </div>
 		    <div class="form-row">
 		    <div class="col-md-2 mb-3">
-		      <label for="validationCustom02">Valor R$</label>
-		      <input type="text" name="valor" class="form-control" id="validationCustom02" placeholder="0.00" required>
-		      <div class="valid-feedback">
-		        Ok!
+		      <label for="validationValor">Valor R$</label>
+		      <input type="text" name="valor" class="form-control" id="validationValor" placeholder="0.00" required>
+		      <div class="invalid-feedback">
+		        Informe um Valor.
 		      </div>
 		    </div>
 		    </div>
 		     <div class="form-row">
 		    <div class="col-md-6 mb-3">
-		      <label for="validationCustom03">Observação</label>
-		      <textarea name="observacao"  class="form-control" id="validationCustom03" placeholder="Observações"></textarea>
+		      <label for="validationObs">Observação</label>
+		      <textarea name="observacao"  class="form-control" id="validationObs" placeholder="Observações"></textarea>
 		     
 		    </div>
 		    </div>

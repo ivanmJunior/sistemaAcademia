@@ -7,48 +7,47 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import br.com.fitNet.model.Atendente;
 import br.com.fitNet.model.Cliente;
 import br.com.fitNet.model.Endereco;
+import br.com.fitNet.model.Funcionario;
 import br.com.fitNet.model.exception.CPFInvalidoException;
-import br.com.fitNet.model.exception.ClienteInvalidoException;
+import br.com.fitNet.model.exception.FuncionarioInvalidoException;
 import br.com.fitNet.model.exception.NomeUsuarioInvalidoException;
-import br.com.fitNet.model.exception.SenhaInvalidaException;
-import br.com.fitNet.model.percistence.ClienteDao;
-import br.com.fitNet.model.percistence.Interfaces.IRepositorioCliente;
+import br.com.fitNet.model.percistence.FuncionarioDao;
+import br.com.fitNet.model.percistence.Interfaces.IRepositorioFuncionario;
 import br.com.fitNet.util.ValidarCPF;
 
 @Service
-public class RegrasClienteServeice {
+public class RegrasAtendenteServeice {
 
-	IRepositorioCliente repClienteDao = new ClienteDao();
+	
+	IRepositorioFuncionario repFuncionarioDao = new FuncionarioDao();
 
-	public void incluir(Cliente cliente)
-			throws SQLException, ClienteInvalidoException, NomeUsuarioInvalidoException, CPFInvalidoException, SenhaInvalidaException {
+	public void incluir(Atendente atendente)
+			throws SQLException, FuncionarioInvalidoException, NomeUsuarioInvalidoException, CPFInvalidoException {
 
-		if(!cliente.getAcesso().getSenha().equals(cliente.getAcesso().getConfirmarSenha())){
-			throw new SenhaInvalidaException("Senhas invalidas! Senhas Diferem.");
-		}
-		if (!ValidarCPF.validarCpf(cliente.getCpf())) {
+		if (!ValidarCPF.validarCpf(atendente.getCpf())) {
 			throw new CPFInvalidoException("Numero de CPF invalido!");
 		} else {
-			if (cliente.getAcesso().getUsuario().equals("") || cliente.getAcesso().getSenha().equals("")
-					|| cliente.getEmail().equals("") || cliente.getNome().equals("")) {
-				throw new ClienteInvalidoException("Campos não podem ser vazio!");
+			if (atendente.getAcesso().getUsuario().equals("") || atendente.getAcesso().getSenha().equals("")
+					|| atendente.getEmail().equals("") || atendente.getNome().equals("")) {
+				throw new FuncionarioInvalidoException("Campos não podem ser vazio!");
 			} else {
-				Set<Cliente> listaClientes = consultar();
-				if (!listaClientes.isEmpty()) {
-					for (Cliente clienteDaLista : listaClientes) {
-						if (clienteDaLista.getCpf().equals(cliente.getCpf())) {
-							throw new ClienteInvalidoException("CPF já cadastrado para outro cliente!");
+				Set<Funcionario> listaAtendentes = consultar();
+				if (!listaAtendentes.isEmpty()) {
+					for (Funcionario atendenteDaLista : listaAtendentes) {
+						if (atendenteDaLista.getCpf().equals(atendente.getCpf())) {
+							throw new FuncionarioInvalidoException("CPF já cadastrado para outro Funcionário!");
 						}
-						if (clienteDaLista.getAcesso().getUsuario().equals(cliente.getAcesso().getUsuario())) {
+						if (atendenteDaLista.getAcesso().getUsuario().equals(atendente.getAcesso().getUsuario())) {
 							throw new NomeUsuarioInvalidoException("Nome de usário já existe. Tente outro!");
 						}
 					}
-					repClienteDao.incluir(cliente);
+					repFuncionarioDao.incluir(atendente);
 
 				} else {
-					repClienteDao.incluir(cliente);
+					repFuncionarioDao.incluir(atendente);
 				}
 			}
 		}
@@ -67,23 +66,28 @@ public class RegrasClienteServeice {
 		return idade;
 	}
 
-	public void remover(Cliente cliente) throws NullPointerException, SQLException {
+	public void remover(Atendente atendente) throws NullPointerException, SQLException {
 
-		if (cliente.getId() <= 0)
+		if (atendente.getId() <= 0)
 			throw new NullPointerException();
 
-		repClienteDao.remover(cliente);
+		repFuncionarioDao.remover(atendente);
 	}
 
-	public void alterar(Cliente cliente) throws SQLException {
+	public void alterar(Atendente atendente) throws SQLException {
 
-		repClienteDao.alterar(cliente);
+		repFuncionarioDao.alterar(atendente);
 
 	}
 
-	public Set<Cliente> consultar() throws SQLException {
-		return repClienteDao.consultar();
+	public Set<Atendente> consultarAtendentes() throws SQLException {
+		return null;
 	}
+	
+	public Set<Funcionario> consultar() throws SQLException {
+		return repFuncionarioDao.consultar();
+	}
+
 
 	public Endereco consultarEndereco(String cep) {
 		return null;
@@ -94,7 +98,7 @@ public class RegrasClienteServeice {
 		return false;
 
 	}
-
+/*
 	public int consultarUltimoIdCliente() throws SQLException {
 		return repClienteDao.consultarAutoIncremento();
 	}
@@ -125,6 +129,6 @@ public class RegrasClienteServeice {
 	public Set<Cliente> consultarClienteParaPagamento() {
 		return null;
 
-	}
+	}*/
 
 }
