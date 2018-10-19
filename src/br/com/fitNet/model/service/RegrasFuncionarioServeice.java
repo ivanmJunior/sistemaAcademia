@@ -87,7 +87,10 @@ public class RegrasFuncionarioServeice {
 	public Set<Funcionario> consultar() throws SQLException {
 		return repFuncionarioDao.consultar();
 	}
-
+	
+	public Funcionario consultarPorId(int id) throws SQLException {
+		return repFuncionarioDao.consultarPorId(id);
+	}
 
 	public Endereco consultarEndereco(String cep) {
 		return null;

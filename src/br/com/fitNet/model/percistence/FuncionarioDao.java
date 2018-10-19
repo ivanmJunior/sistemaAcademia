@@ -79,4 +79,17 @@ public class FuncionarioDao implements IRepositorioFuncionario {
 		
 	}
 
+	@Override
+	public Funcionario consultarPorId(int id) throws SQLException {
+		Funcionario funcionarioRetorno = null;
+		
+		for(Funcionario funcionarioDaConsulta : LISTA_FUNCIONARIOS){
+			if(funcionarioDaConsulta.getId() == id){
+				funcionarioRetorno = funcionarioDaConsulta;
+			}
+		}
+		
+		return funcionarioRetorno;
+	}
+
 }

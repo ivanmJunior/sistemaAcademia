@@ -19,4 +19,5 @@ public interface IRepositorioFuncionario {
 	Acesso consultarAcessoPorId(int idAcesso) throws SQLException;
 	Set<Acesso> consultarTodosAcessos() throws SQLException;
 	Set<Funcionario> consultar()throws SQLException;
+	Funcionario consultarPorId(int id)throws SQLException;
 }

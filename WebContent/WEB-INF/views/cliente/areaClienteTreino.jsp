@@ -137,7 +137,7 @@
         <small>Gerenciamento de treinos</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="<%=request.getContextPath()%>/areaDoCLiente"><i class="fa fa-home"></i> Home</a></li>
         <li class="active">Usuários</li>
       </ol>
     </section>
@@ -219,11 +219,13 @@
               <div class="box-body">
                <div class="form-group">
                   <label for="InputCountryIntrutor">Intrutor</label>
+                  
                   <select class="form-control" id="InputCountryIntrutor" name="horaInicio" required>
                     <option value="" selected="selected">Selecione o Instrutor</option>
                     <c:forEach items="${listaInstrutores}" var="instrutor">
-                    	<option value="${instrutor.nome}">${instrutor.nome}</option>
+                    	<option value="${instrutor.id}">${instrutor.nome}</option>
                     </c:forEach>
+                    
 				</select>
                 </div>
                 <div class="form-group">
@@ -280,17 +282,7 @@
                   <label for="exampleInputCountry">Modalidades</label>
                   <select class="form-control" id="exampleInputCountry" name="modalidade.descricao" required="true">
                     <option value="" selected="selected">Selecione uma Modalidade</option>
-                    <option value="Musculação">Musculação</option>
-                    <option value="Aeróbica">Aeróbica</option>
-                    <option value="Jump">Jump</option>
-                    <option value="Funcional">Funcional</option>
-                    <option value="Exercícios Cardios">Exercícios Cardios</option>
-                    <option value="Pilates">Pilates</option>
-                    <option value="Jiu Jitsu">Jiu Jitsu</option>
-                    <option value="Box">Box</option>
-                    <option value="Muay">Muay Thai</option>
-                    <option value="Hidroginástica">Hidroginástica</option>
-                    <option value="Natação">Natação</option>
+
                   </select>
                 </div>
               </div>

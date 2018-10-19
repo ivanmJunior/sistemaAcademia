@@ -2,6 +2,7 @@ package br.com.fitNet.controller;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class FuncionarioController {
 	static int ID = 0; //Provisório, apenas para testes.
 	Mensagens msg = new Mensagens();
 	
+	
 	@Autowired
 	RegrasAtendenteServeice regraAtendente;
 	
@@ -40,6 +42,8 @@ public class FuncionarioController {
 	
 	@Autowired
 	RegrasModalidadeServeice regraModalidade;
+	
+	static Set<String>ESPECIALIDADES = new LinkedHashSet<>();
 	
 	//Seleciona Função
 	@RequestMapping("selecionaInserir")
@@ -99,9 +103,11 @@ public class FuncionarioController {
 		instrutor.getDataCadastro().setTime(new Date());
 		instrutor.getDataAlteracao().setTime(new Date());
 		instrutor.setNome(instrutor.getNome().toUpperCase());
+		instrutor.setEspecialidades(ESPECIALIDADES);
 		
 		try {
 			regraInstrutor.incluir(instrutor);
+			ESPECIALIDADES.clear();
 		} catch (FuncionarioInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
 			ID--;
 			e.printStackTrace();
@@ -170,6 +176,23 @@ public class FuncionarioController {
 		ModelAndView modelo = new ModelAndView(paginaMensagem);
 		modelo.addObject("msg", msg);
 		return modelo;
+	}
+	
+	@RequestMapping("adcionaEspecialidade")
+	public void execAdcionaExpecialidade(String especialidades){
+		especialidades = especialidades.toUpperCase();
+		
+		ESPECIALIDADES.add(especialidades);
+		
+		System.out.println(ESPECIALIDADES.toString());
+	}
+	
+	@RequestMapping("removeEspecialidade")
+	public void execRemoveExpecialidade(String especialidades){
+		especialidades = especialidades.toUpperCase();
+		
+		ESPECIALIDADES.remove(especialidades);
+		System.out.println(ESPECIALIDADES.toString());
 	}
 	
 	/*@RequestMapping("adicionaClientesUsuario")

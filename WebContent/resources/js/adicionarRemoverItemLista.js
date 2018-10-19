@@ -5,6 +5,7 @@ function adicionarEspecialidade() {
 	var existe = false;
 	var itemSelecionado = combo.options[combo.selectedIndex].text;
 	var opcao = document.createElement('option');
+	
 	document.querySelector('#listaEspecialidades').appendChild(opcao);
 	var lista = document.querySelector('#listaEspecialidades');
 	
@@ -23,12 +24,15 @@ function adicionarEspecialidade() {
 	}
 	if(!existe){
 		lista.options[lista.options.length-1].text = itemSelecionado;
+		$.get("adcionaEspecialidade?especialidades="+itemSelecionado);
 	}
 }
 
 function removerEspecialidade() {
 	
 	var lista = document.querySelector('#listaEspecialidades');
-	lista.remove(lista.selectedIndex);
+	var itemSelecionadoLista = lista.options[lista.selectedIndex].text;
 	
+	$.get("removeEspecialidade?especialidades="+itemSelecionadoLista);
+	lista.remove(lista.selectedIndex);
 }

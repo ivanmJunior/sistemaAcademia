@@ -1,15 +1,11 @@
 package br.com.fitNet.model.service;
 
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import br.com.fitNet.model.Atendente;
-import br.com.fitNet.model.Cliente;
 import br.com.fitNet.model.Endereco;
 import br.com.fitNet.model.Funcionario;
 import br.com.fitNet.model.Instrutor;
@@ -55,37 +51,20 @@ public class RegrasInstrutorServeice {
 		}
 	}
 
-	public Integer getIdade(Date data) {
-		Calendar dataNascimento = Calendar.getInstance();
-		dataNascimento.setTime(data);
-		Calendar dataAtual = Calendar.getInstance();
-		Integer diferencaMes = dataAtual.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
-		Integer diferencaDia = dataAtual.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
-		Integer idade = (dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
-		if (diferencaMes < 0 || (diferencaMes == 0 && diferencaDia < 0)) {
-			idade--;
-		}
-		return idade;
-	}
+	public void remover(Instrutor instrutor) throws NullPointerException, SQLException {
 
-	public void remover(Atendente atendente) throws NullPointerException, SQLException {
-
-		if (atendente.getId() <= 0)
+		if (instrutor.getId() <= 0)
 			throw new NullPointerException();
 
-		repFuncionarioDao.remover(atendente);
+		repFuncionarioDao.remover(instrutor);
 	}
 
-	public void alterar(Atendente atendente) throws SQLException {
+	public void alterar(Instrutor instrutor) throws SQLException {
 
-		repFuncionarioDao.alterar(atendente);
+		repFuncionarioDao.alterar(instrutor);
 
 	}
 
-	public Set<Atendente> consultarAtendentes() throws SQLException {
-		return null;
-	}
-	
 	public Set<Funcionario> consultar() throws SQLException {
 		return repFuncionarioDao.consultar();
 	}
@@ -107,10 +86,6 @@ public class RegrasInstrutorServeice {
 
 	}
 
-	public boolean verificarCliente(Cliente cliente) {
-		return false;
-
-	}
 /*
 	public int consultarUltimoIdCliente() throws SQLException {
 		return repClienteDao.consultarAutoIncremento();

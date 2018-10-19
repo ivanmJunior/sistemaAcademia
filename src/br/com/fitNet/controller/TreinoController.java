@@ -67,7 +67,7 @@ public class TreinoController {
 			System.out.println("cheguei!!!cath inserir"+e.getMessage());
 			e.printStackTrace();
 		}
-		return "cliente/areaDoCliente";
+		return "cliente/areaDoClienteTreino";
 	}
 	
 	@RequestMapping("removerTreino")
@@ -125,5 +125,10 @@ public class TreinoController {
 		ModelAndView modelo = new ModelAndView(paginaMensagem);
 		modelo.addObject("msg", msg);
 		return modelo;
+	}
+	
+	
+	public void execCarregaEspecialidadesInstrutor(int id){
+		
 	}
 }
