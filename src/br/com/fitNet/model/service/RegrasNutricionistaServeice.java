@@ -3,60 +3,62 @@ package br.com.fitNet.model.service;
 import java.sql.SQLException;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fitNet.model.Atendente;
 import br.com.fitNet.model.Endereco;
 import br.com.fitNet.model.Funcionario;
+import br.com.fitNet.model.Nutricionista;
 import br.com.fitNet.model.exception.CPFInvalidoException;
 import br.com.fitNet.model.exception.FuncionarioInvalidoException;
 import br.com.fitNet.model.exception.NomeUsuarioInvalidoException;
+import br.com.fitNet.model.percistence.FuncionarioDao;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioFuncionario;
 import br.com.fitNet.util.ValidarCPF;
 
 @Service
-public class RegrasAtendenteServeice {
+public class RegrasNutricionistaServeice {
 
-	@Autowired
-	IRepositorioFuncionario repFuncionarioDao;
+	
+	IRepositorioFuncionario repFuncionarioDao = new FuncionarioDao();
 
-	public void incluir(Atendente atendente)
+	public void incluir(Nutricionista nutricionista)
 			throws SQLException, FuncionarioInvalidoException, NomeUsuarioInvalidoException, CPFInvalidoException {
 
-		if (!ValidarCPF.validarCpf(atendente.getCpf())) {
+		if (!ValidarCPF.validarCpf(nutricionista.getCpf())) {
 			throw new CPFInvalidoException("Numero de CPF invalido!");
 		} else {
-			if (atendente.getAcesso().getUsuario().equals("") || atendente.getAcesso().getSenha().equals("")
-					|| atendente.getEmail().equals("") || atendente.getNome().equals("")) {
+			if (nutricionista.getAcesso().getUsuario().equals("") || nutricionista.getAcesso().getSenha().equals("")
+					|| nutricionista.getEmail().equals("") || nutricionista.getNome().equals("")) {
 				throw new FuncionarioInvalidoException("Campos não podem ser vazio!");
 			} else {
-				Set<Funcionario> listaAtendentes = consultar();
-				if (!listaAtendentes.isEmpty()) {
-					for (Funcionario atendenteDaLista : listaAtendentes) {
-						if (atendenteDaLista.getCpf().equals(atendente.getCpf())) {
+				Set<Funcionario> listaNutricionista = consultar();
+				if (!listaNutricionista.isEmpty()) {
+					for (Funcionario nutricionistaDaLista : listaNutricionista) {
+						if (nutricionistaDaLista.getCpf().equals(nutricionista.getCpf())) {
 							throw new FuncionarioInvalidoException("CPF já cadastrado para outro Funcionário!");
 						}
-						if (atendenteDaLista.getAcesso().getUsuario().equals(atendente.getAcesso().getUsuario())) {
+						if (nutricionistaDaLista.getAcesso().getUsuario().equals(nutricionista.getAcesso().getUsuario())) {
 							throw new NomeUsuarioInvalidoException("Nome de usário já existe. Tente outro!");
 						}
 					}
-					repFuncionarioDao.incluir(atendente);
+					repFuncionarioDao.incluir(nutricionista);
 
 				} else {
-					repFuncionarioDao.incluir(atendente);
+					repFuncionarioDao.incluir(nutricionista);
 				}
 			}
 		}
 	}
 
-	public void alterar(Atendente atendente) throws SQLException {
 
-		repFuncionarioDao.alterar(atendente);
+	public void alterar(Atendente nutricionista) throws SQLException {
+
+		repFuncionarioDao.alterar(nutricionista);
 
 	}
 
-	public Set<Atendente> consultarAtendentes() throws SQLException {
+	public Set<Atendente> consultarNutricionista() throws SQLException {
 		return null;
 	}
 	

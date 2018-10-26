@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.fitNet.model.Cliente;
 import br.com.fitNet.model.Contrato;
 import br.com.fitNet.model.Endereco;
 import br.com.fitNet.model.Matricula;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioCliente;
 
+@Repository
 public class ClienteDao implements IRepositorioCliente{
 
 	public static Set<Cliente> LISTA_CLIENTE = new LinkedHashSet<>();
@@ -34,7 +37,7 @@ public class ClienteDao implements IRepositorioCliente{
 				clienteDaLista.setFone2(cliente.getFone2());
 				clienteDaLista.setStatusAtivo(cliente.isStatusAtivo());
 				
-				LISTA_CLIENTE.add(clienteDaLista);
+				//LISTA_CLIENTE.add(clienteDaLista);
 			}
 		}
 	}

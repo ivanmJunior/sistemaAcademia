@@ -2,10 +2,9 @@ package br.com.fitNet.model;
 
 import java.util.GregorianCalendar;
 
-public class Atendente extends Funcionario{
+public class Nutricionista extends Funcionario{
 	
-	public Atendente(){
-		setCrn("");
+	public Nutricionista(){
 		setEndereco(new Endereco());
 		setAcesso(new Acesso());
 		setDataAdmissao(new GregorianCalendar());
@@ -13,5 +12,5 @@ public class Atendente extends Funcionario{
 		setDataAlteracao(new GregorianCalendar());
 		setDataNascimento(new GregorianCalendar());
 	}
-
+	
 }

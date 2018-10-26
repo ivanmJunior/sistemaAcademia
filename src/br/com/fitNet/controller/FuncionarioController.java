@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.fitNet.model.Atendente;
 import br.com.fitNet.model.Funcionario;
 import br.com.fitNet.model.Instrutor;
+import br.com.fitNet.model.Modalidade;
+import br.com.fitNet.model.Nutricionista;
 import br.com.fitNet.model.exception.CPFInvalidoException;
 import br.com.fitNet.model.exception.FuncionarioInvalidoException;
 import br.com.fitNet.model.exception.NomeUsuarioInvalidoException;
@@ -21,58 +23,62 @@ import br.com.fitNet.model.service.RegrasAtendenteServeice;
 import br.com.fitNet.model.service.RegrasFuncionarioServeice;
 import br.com.fitNet.model.service.RegrasInstrutorServeice;
 import br.com.fitNet.model.service.RegrasModalidadeServeice;
-import br.com.fitNet.util.FuncaoConfig;
+import br.com.fitNet.model.service.RegrasNutricionistaServeice;
+import br.com.fitNet.util.ConfigMetodo;
 import br.com.fitNet.util.Mensagens;
 
 @Controller
 public class FuncionarioController {
 
-	static int ID = 0; //Provisório, apenas para testes.
-	Mensagens msg = new Mensagens();
-	
+	private static int ID = 0; //Provisório, apenas para testes.
+	private Mensagens msg = new Mensagens();
+	private static Set<String>ESPECIALIDADES = new LinkedHashSet<>();
 	
 	@Autowired
 	RegrasAtendenteServeice regraAtendente;
-	
 	@Autowired
 	RegrasInstrutorServeice regraInstrutor;
-	
+	@Autowired
+	RegrasNutricionistaServeice regraNutricionista;
 	@Autowired
 	RegrasFuncionarioServeice regraFuncionario;
-	
 	@Autowired
 	RegrasModalidadeServeice regraModalidade;
 	
-	static Set<String>ESPECIALIDADES = new LinkedHashSet<>();
 	
-	//Seleciona Função
+	//Seleciona Inserir
 	@RequestMapping("selecionaInserir")
-	public ModelAndView selecionaFuncao(FuncaoConfig funcao){
-		funcao.setFuncao(funcao.getFuncao().toUpperCase());	
+	public ModelAndView selecionaInserir(ConfigMetodo configMetodo){
 		
-			if(funcao.getFuncao().equals("RECEPCIONISTA")){
-				funcao.setMetodo("adicionaAtendente");
-			}else if(funcao.getFuncao().equals("INSTRUTOR")){
+		configMetodo.setFuncao(configMetodo.getFuncao().toUpperCase());	
+		Set<Modalidade> listaModalidades = new LinkedHashSet<>();
+		
+			if(configMetodo.getFuncao().equals("RECEPCIONISTA")){
+				configMetodo.setMetodo("adicionaAtendente");
+			}else if(configMetodo.getFuncao().equals("INSTRUTOR")){
 				try {
-					funcao.setMetodo("adicionaInstrutor");
-					funcao.setListaModalidades(regraModalidade.consultar());
+					configMetodo.setMetodo("adicionaInstrutor");
+					listaModalidades = regraModalidade.consultar();
 				} catch (SQLException e) {
 					msg.setMensagemErro("Erro: " +e.getMessage());
 					return execMensagens(msg);
 				}
+			}else if(configMetodo.getFuncao().equals("NUTRICIONISTA")){
+				configMetodo.setMetodo("adicionaNutricionista");
 			}else{
 				msg.setMensagemErro("Selecione uma Função!");
 				return execMensagens(msg);
 			}
 			
 			ModelAndView modelo = new ModelAndView("funcionario/novoFuncionario");
-			modelo.addObject("objetoFuncao", funcao);
+			modelo.addObject("objetoConfigMetodo", configMetodo);
+			modelo.addObject("listaModalidades", listaModalidades);
 			return modelo;
 	
-	}  //Fim Seleciona Função
+	}  //Fim Seleciona Inserir
 	
 	
-	//Incluir Atendente
+	//Inserir Atendente
 	@RequestMapping("adicionaAtendente")
 	public String execInserirAtendente(Atendente atendente){
 		ID++;
@@ -85,17 +91,16 @@ public class FuncionarioController {
 			regraAtendente.incluir(atendente);
 		} catch (FuncionarioInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
 			ID--;
-			e.printStackTrace();
 			msg.setMensagemErro("Erro ao Incluir: " +e.getMessage());
 			return "redirect:mostraMensagemFuncionario";
 			
 		}
 		return "redirect:listarFuncionarios";
 	
-	}  //Fim Incluir Atendente
+	}  //Fim Inserir Atendente
 	
 	
-	//Incluir Instrutor
+	//Inserir Instrutor
 	@RequestMapping("adicionaInstrutor")
 	public String execInserirAtendente(Instrutor instrutor){
 		ID++;
@@ -110,14 +115,34 @@ public class FuncionarioController {
 			ESPECIALIDADES.clear();
 		} catch (FuncionarioInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
 			ID--;
-			e.printStackTrace();
+			msg.setMensagemErro("Erro ao Incluir: " +e.getMessage());
+			return "redirect:mostraMensagemFuncionario";
+		}
+		return "redirect:listarFuncionarios";
+	
+	}  //Fim Inserir instrutor
+	
+	
+	//Inserir Nutricionista
+	@RequestMapping("adicionaNutricionista")
+	public String execInserirNutricionista(Nutricionista nutricionista){
+		ID++;
+		nutricionista.setId(ID);
+		nutricionista.getDataCadastro().setTime(new Date());
+		nutricionista.getDataAlteracao().setTime(new Date());
+		nutricionista.setNome(nutricionista.getNome().toUpperCase());
+		
+		try {
+			regraNutricionista.incluir(nutricionista);
+		} catch (FuncionarioInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
+			ID--;
 			msg.setMensagemErro("Erro ao Incluir: " +e.getMessage());
 			return "redirect:mostraMensagemFuncionario";
 			
 		}
 		return "redirect:listarFuncionarios";
 	
-	}  //Fim incluir instrutor
+	}  //Fim Inserir Nutricionista
 	
 	
 	//Listar Funcionários
@@ -128,11 +153,9 @@ public class FuncionarioController {
 			Set<Funcionario> listaFuncionarios = regraFuncionario.consultar();
 			modelo.addAttribute("listaFuncionarios", listaFuncionarios);
 		} catch (SQLException e) {
-			e.printStackTrace();
 			msg.setMensagemErro("Erro: " +e.getMessage());
 			return "redirect:mostraMensagemFuncionario";
 		}
-		
 		return "funcionario/funcionarios";
 	
 	}  //Fim Listar Funcionários
@@ -163,7 +186,7 @@ public class FuncionarioController {
 	
 	}  //Fim Mensagens Funcionários
 	
-	
+	@RequestMapping("passaMensagemFuncionario")
 	public ModelAndView execMensagens(Mensagens msg){
 		String paginaMensagem = "";
 		
@@ -181,99 +204,137 @@ public class FuncionarioController {
 	@RequestMapping("adcionaEspecialidade")
 	public void execAdcionaExpecialidade(String especialidades){
 		especialidades = especialidades.toUpperCase();
-		
 		ESPECIALIDADES.add(especialidades);
-		
 		System.out.println(ESPECIALIDADES.toString());
 	}
 	
 	@RequestMapping("removeEspecialidade")
 	public void execRemoveExpecialidade(String especialidades){
 		especialidades = especialidades.toUpperCase();
-		
 		ESPECIALIDADES.remove(especialidades);
 		System.out.println(ESPECIALIDADES.toString());
 	}
 	
-	/*@RequestMapping("adicionaClientesUsuario")
-	public String execInserirClienteUsuario(Cliente cliente){
-		ID++;
-		cliente.setId(ID);
-		cliente.getDataCadastro().setTime(new Date());
-		cliente.getDataAlteracao().setTime(new Date());
-		cliente.setNome(cliente.getNome().toUpperCase());
-		msg.setMensagemSucesso("");
-		msg.setMensagemErro("");
-		//criando provisóriamente a matricula
-		String matricula = ID +""+cliente.getDataCadastro().get(Calendar.YEAR);
-		cliente.getMatricula().setNumeroMatricula(Integer.parseInt(matricula));
-		try {
-			regraCliente.incluir(cliente);
-			msg.setMensagemSucesso("Secesso! Seja Bem Vindo!");
-		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException e) {
-			msg.setMensagemErro("Erro ao cadastrar! Erro: "+e.getMessage());
-			e.printStackTrace();
-		}
-		return "redirect:mostraMensagem";
+	@RequestMapping("limparListaEspecialidades")
+	public void execLimparLista(){
+		ESPECIALIDADES.clear();
+		System.out.println(ESPECIALIDADES.toString());
 	}
 	
 	
-	
-	@RequestMapping("removeCliente")
-	public String execRemoverCliente(Cliente cliente){
+	@RequestMapping("removeFuncionario")
+	public String execRemoverFuncionario(int id){
 		
 		try {
-			regraCliente.remover(cliente);
+			regraFuncionario.remover(id);
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
+			msg.setMensagemErro("Erro ao remover: "+e.getMessage());
+			return "redirect:mostraMensagemFuncionario";
 		}
 		
-		return "redirect:listarClientes";
+		return "redirect:listarFuncionarios";
 	}
 	
-	@RequestMapping("carregarTelaCliente")
-	public String execCarregarCliente(int id, Model modelo){
-		
-		try {
-			Cliente clienteDaConsulta = regraCliente.consultarClientePorId(id);
-			clienteDaConsulta.getDataAlteracao().setTime(new Date());
-			modelo.addAttribute("cliente", clienteDaConsulta);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return "cliente/editarClienteSistema";
-	}
 	
-	@RequestMapping("editarCliente")
-	public String execEditarCliente(Cliente cliente){
-			
+	@RequestMapping("carregarTelaFuncionario")
+	public String execCarregarFuncionario(int id, Model modelo){
+		ConfigMetodo configMetodo = new ConfigMetodo();
 		try {
-			cliente.setNome(cliente.getNome().toUpperCase());
-			regraCliente.alterar(cliente);
-			} catch (Exception e) {
-
-				e.printStackTrace();
+			Funcionario funcionarioDaConsulta = regraFuncionario.consultarPorId(id);
+			
+			
+			if(funcionarioDaConsulta.getFuncao().equals("RECEPCIONISTA")){
+				configMetodo.setMetodo("editarAtendente");
+			
+			}else if(funcionarioDaConsulta.getFuncao().equals("INSTRUTOR")){
+				configMetodo.setMetodo("editarInstrutor");
+				
+			}else if(funcionarioDaConsulta.getFuncao().equals("NUTRICIONISTA")){
+				configMetodo.setMetodo("editarNutricionista");
 			}
-		return "redirect:listarClientes";
+			
+			Set<Modalidade> listaModalidades = regraModalidade.consultar();
+			funcionarioDaConsulta.getDataAlteracao().setTime(new Date());
+			modelo.addAttribute("funcionario", funcionarioDaConsulta);
+			modelo.addAttribute("listaModalidades", listaModalidades);
+			modelo.addAttribute("objetoConfigMetodo", configMetodo);
+		} catch (SQLException e) {
+			msg.setMensagemErro("Erro! "+e.getMessage());
+			return "redirect:mostraMensagemFuncionario";
+		}
+		
+		return "funcionario/editarFuncionario";
 	}
 	
-	@RequestMapping("filtrarTelaCliente")
+	@RequestMapping("editarAtendente")
+	public String execEditarAtendente(Atendente atendente){
+			
+		try {
+			atendente.setNome(atendente.getNome().toUpperCase());
+			regraFuncionario.alterar(atendente);
+			} catch (Exception e) {
+				msg.setMensagemErro("Erro! "+e.getMessage());
+				return "redirect:mostraMensagemFuncionario";
+			}
+		return "redirect:listarFuncionarios";
+	}
+	
+	@RequestMapping("editarInstrutor")
+	public String execEditarInstrutor(Instrutor instrutor){
+			
+		try {
+			instrutor.setNome(instrutor.getNome().toUpperCase());
+			regraFuncionario.alterar(instrutor);
+			} catch (Exception e) {
+				msg.setMensagemErro("Erro! "+e.getMessage());
+				return "redirect:mostraMensagemFuncionario";
+			}
+		return "redirect:listarFuncionarios";
+	}
+	
+	@RequestMapping("editarNutricionista")
+	public String execEditarNutricionista(Nutricionista nutricionista){
+			
+		try {
+			nutricionista.setNome(nutricionista.getNome().toUpperCase());
+			regraFuncionario.alterar(nutricionista);
+			} catch (Exception e) {
+				msg.setMensagemErro("Erro! "+e.getMessage());
+				return "redirect:mostraMensagemFuncionario";
+			}
+		return "redirect:listarFuncionarios";
+	}
+	
+	
+	@RequestMapping("filtrarTelaFuncionario")
 	public String execCarregarFiltrar(String nome, Model modelo){
 		
 		try {
 			nome = nome.toUpperCase();
-			Set<Cliente>listaClientes = regraCliente.consultarClientesPorNome(nome);
-			modelo.addAttribute("clientes", listaClientes);
+			Set<Funcionario>listaFuncionario = regraFuncionario.consultarPorNome(nome);
+			modelo.addAttribute("listaFuncionarios", listaFuncionario);
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
+			msg.setMensagemErro("Erro! "+e.getMessage());
+			return "redirect:mostraMensagemFuncionario";
 		}
 		
-		return "cliente/clientes";
-	}*/
+		return "funcionario/funcionarios";
+	}
 	
+	
+	public ModelAndView execCarregarModalidades(String paginaRetorno){
+		Set<Modalidade> listaModalidades = new LinkedHashSet<>();
+		
+		try {
+			listaModalidades = regraModalidade.consultar();
+		} catch (SQLException e) {
+			msg.setMensagemErro("Erro! "+e.getMessage());
+			return execMensagens(msg);
+		}
+		ModelAndView modelo = new ModelAndView(paginaRetorno);
+		modelo.addObject("listaModalidades", listaModalidades);
+		
+		return modelo;
+	}
 	
 }

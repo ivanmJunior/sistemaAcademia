@@ -29,7 +29,7 @@
       		</form>
       	</div>
       	<div class="col-sm-4">
-      		<form class="form-inline mt-2 mt-md-0" action="<%=request.getContextPath()%>/filtrarTelaCliente?nome=${cl.nome}">
+      		<form class="form-inline mt-2 mt-md-0" action="<%=request.getContextPath()%>/filtrarTelaFuncionario?nome=${funcionario.nome}">
       			<input class="form-control mr-sm-1" type="text" name="nome"
 				placeholder="Digite aqui" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-3" type="submit">Filtrar</button>
@@ -69,8 +69,8 @@
 			      	<td>NÃO</td>
 			      </c:if>
 			      <td><fmt:formatDate type="date" value="${funcionario.dataCadastro.time}" pattern="dd/MM/yyyy"/></td>
-			      <td><a href="<%=request.getContextPath() %>/carregarTelaCliente?id=${cl.id}" class="btn btn-primary btn-xs">Editar</a>
-			      	  <a href="<%=request.getContextPath() %>/removeCliente?id=${cl.id}" class="btn btn-danger btn-xs">Excluir</a>
+			      <td><a href="<%=request.getContextPath() %>/carregarTelaFuncionario?id=${funcionario.id}" class="btn btn-primary btn-xs">Editar</a>
+			      	  <a href="<%=request.getContextPath() %>/removeFuncionario?id=${funcionario.id}" class="btn btn-danger btn-xs">Excluir</a>
 			      </td>
 		    	</tr>
 		  	</c:forEach>
@@ -104,7 +104,7 @@
                     <option value="Recepcionista">Recepcionista</option>
                     <option value="Instrutor">Instrutor</option>
                     <option value="Nutricionista">Nutricionista</option>
-                   <option value="teste de Erro">teste de Erro</option>
+        
                  </select>
                  <div class="invalid-feedback">
 		            Informe a Função.

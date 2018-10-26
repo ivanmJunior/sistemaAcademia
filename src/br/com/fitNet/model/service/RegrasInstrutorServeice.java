@@ -51,14 +51,6 @@ public class RegrasInstrutorServeice {
 		}
 	}
 
-	public void remover(Instrutor instrutor) throws NullPointerException, SQLException {
-
-		if (instrutor.getId() <= 0)
-			throw new NullPointerException();
-
-		repFuncionarioDao.remover(instrutor);
-	}
-
 	public void alterar(Instrutor instrutor) throws SQLException {
 
 		repFuncionarioDao.alterar(instrutor);

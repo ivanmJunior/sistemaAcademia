@@ -11,7 +11,7 @@ public interface IRepositorioFuncionario {
 	void incluirAcesso(Acesso acesso) throws SQLException;
 	void incluir(Funcionario funcionario);
 	void alterar(Funcionario funcionario);
-	void remover(Funcionario funcionario) throws SQLException;
+	void remover(int id) throws SQLException;
 	void alterarAcesso(Acesso acesso) throws SQLException;
 	void removerAcesso(int idAcesso) throws SQLException;
 	Acesso consultarAcesso(Acesso acesso) throws SQLException;
@@ -20,4 +20,5 @@ public interface IRepositorioFuncionario {
 	Set<Acesso> consultarTodosAcessos() throws SQLException;
 	Set<Funcionario> consultar()throws SQLException;
 	Funcionario consultarPorId(int id)throws SQLException;
+	Set<Funcionario> consultarPorNome(String nome)throws SQLException;
 }

@@ -25,18 +25,39 @@
 		<h1 class="mt-5">Cadastrar Novo Funcionario</h1>
 
 		<form class="needs-validation" novalidate
-			action="<%=request.getContextPath()%>/${objetoConfigMetodo.metodo}"
+			action="<%=request.getContextPath()%>/${objetoConfigMetodo.metodo}?id=${funcionario.id}"
 			method="post">
 			<div class="p-4 bg-light rounded">
+			 <div class="form-row">
+		    <div class="col-md-4 mb-3">
+		      <label >Código</label>
+		      <label class="form-control">${funcionario.id}</label>
+		    </div>
+		  
+		      <div class="col-md-4 mb-3">
+                  <label for="exampleInputBirth">Data Cadastro</label>
+                   <label class="form-control">
+                   		<fmt:formatDate value="${funcionario.dataCadastro.time}" pattern="dd/MM/yyyy"/>
+                   </label>
+		      </div>
+		      <div class="col-md-4 mb-3">
+                  <label for="exampleInputBirth">Data Alteração</label>
+                  <label class="form-control">
+                  		<fmt:formatDate value="${funcionario.dataAlteracao.time}" pattern="dd/MM/yyyy"/>
+                  </label>
+    	     </div>
+		  </div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
-						<label for="validationNome">Nome</label> <input type="text"
-							onblur="lengthMinimo(this, 15);" name="nome" class="form-control" id="validationNome"
+						<label for="validationNome">Nome</label>
+						<input type="text" onblur="lengthMinimo(this, 15);"
+						value="${funcionario.nome}" name="nome" class="form-control" id="validationNome"
 							placeholder="Informe o Nome" required>
 							<div class="invalid-feedback">Informe o nome completo.</div>
 					</div>
 					<div class="col-md-4 mb-3">
-						<label for="validationEmail">Email</label> <input type="email"
+						<label for="validationEmail">Email</label>
+						<input type="email" value="${funcionario.email}"
 							name="email" class="form-control" id="validationEmail"
 							placeholder="Email">
 						<div class="invalid-feedback">Por favor informe o email.</div>
@@ -44,29 +65,35 @@
 					<div class="col-md-2 mb-3">
 						<label for="exampleInputBirthNascimento">Data de
 							Nascimento</label> <input type="date" class="form-control"
+							value='<fmt:formatDate value="${funcionario.dataNascimento.time}" 
+							pattern="yyyy-MM-dd"/>'
 							id="exampleInputBirthNascimento" name="dataNascimento">
 					</div>
 					<div class="col-md-2 mb-3">
-						<label for="validationCPF">CPF</label> <input type="text" min="11"
-							onblur="lengthIgual(this, 11);" name="cpf" class="form-control" id="validationCPF"
+						<label for="validationCPF">CPF</label> 
+						<input type="text" min="11"	onblur="lengthIgual(this, 11);" 
+							value="${funcionario.cpf}" name="cpf" class="form-control" id="validationCPF"
 							placeholder="99999999999" required>
 						<div class="invalid-feedback">Informe CPF com 11 digitos.</div>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
-						<label for="validationRG">RG</label> <input type="text" min="5"
+						<label for="validationRG">RG</label>
+						<input type="text" min="5" value="${funcionario.rg}"
 							name="rg" class="form-control" id="validationRG"
 							placeholder="Nº RG">
 					</div>
 					<div class="col-md-2 mb-3">
-						<label for="validationCTPS">CTPS</label> <input type="text"
+						<label for="validationCTPS">CTPS</label>
+						<input type="text" value="${funcionario.ctps}"
 							name="ctps" class="form-control" id="validationCTPS"
 							placeholder="Nº CTPS">
 
 					</div>
 					<div class="col-md-2 mb-3">
-						<label for="validationCRN">CRN</label> <input type="text" disabled
+						<label for="validationCRN">CRN</label>
+						<input type="text" disabled value="${funcionario.crn}"
 							name="crn" class="form-control" id="validationCRN"
 							placeholder="Nº CRN">
 						<div class="invalid-feedback">Informe o CRN.</div>
@@ -74,11 +101,13 @@
 					<div class="col-md-2 mb-3">
 						<label for="exampleInputBirthAdmissao">Data de Admissão</label> <input
 							type="date" class="form-control" id="exampleInputBirthAdmissao"
-							name="dataAdmissao" required>
+							value='<fmt:formatDate value="${funcionario.dataAdmissao.time}" 
+							pattern="yyyy-MM-dd"/>' name="dataAdmissao" required>
 						<div class="invalid-feedback">Informe uma Data.</div>
 					</div>
 					<div class="col-md-2 mb-3">
-						<label for="validationSalario">Salário</label> <input type="text"
+						<label for="validationSalario">Salário</label>
+						<input type="text" value="${funcionario.salario}"
 							name="salario" class="form-control" id="validationSalario"
 							placeholder="0.00" required>
 						<div class="invalid-feedback">Informe o Salário.</div>
@@ -93,22 +122,24 @@
 							</div>
 							<input type="text" onblur="lengthMinimo(this, 6);" name="acesso.usuario"
 								class="form-control" id="validationCustomUsername"
-								placeholder="Usuário" aria-describedby="inputGroupPrepend"
-								required>
+								value="${funcionario.acesso.usuario}" placeholder="Usuário"
+								aria-describedby="inputGroupPrepend" required>
 							<div class="invalid-feedback">Informe um usuário com Mínimo 6 digitos.</div>
 						</div>
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="validationSenha">Senha</label> <input type="password"
 							onblur="limiteMinimo();" name="acesso.senha" class="form-control"
-							id="validationSenha" placeholder="Senha" required>
+							id="validationSenha" placeholder="Senha"
+							value="${funcionario.acesso.senha}" required>
 						<div class="invalid-feedback">Informe a senha com Mínimo 6 digitos.</div>
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="validationConfirmarSenha">Confirmar Senha</label> <input
 							type="password" name="acesso.confirmarSenha"
 							class="form-control" id="validationConfirmarSenha"
-							placeholder="Confirme Senha" required>
+							placeholder="Confirme Senha" 
+							value="${funcionario.acesso.confirmarSenha}" required>
 						<div class="invalid-feedback">Senhas Divergem.</div>
 					</div>
 				</div>
@@ -118,34 +149,34 @@
 					<div class="col-md-4 mb-3">
 						<label for="validationRua">Endereço</label> <input type="text"
 							name="endereco.logradouro" class="form-control"
-							id="validationRua" placeholder="Rua">
+							id="validationRua" placeholder="Rua" value="${funcionario.endereco.logradouro}">
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationNumero">Número</label> <input type="number"
 							name="endereco.numero" class="form-control" id="validationNumero"
-							placeholder="Numero">
+							placeholder="Numero" value="${funcionario.endereco.numero}">
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationComplemento">Complemento</label> <input
 							type="text" name="endereco.complemento" class="form-control"
-							id="validationComplemento" placeholder="Ex.: casa">
+							id="validationComplemento" placeholder="Ex.: casa" value="${funcionario.endereco.complemento}">
 					</div>
 
 					<div class="col-md-4 mb-3">
 						<label for="validationBairro">Bairro</label> <input type="text"
 							name="endereco.bairro" class="form-control" id="validationBairro"
-							placeholder="Bairro">
+							placeholder="Bairro" value="${funcionario.endereco.bairro}">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="validationCidade">Cidade</label> <input type="text"
 							name="endereco.cidade" class="form-control" id="validationCidade"
-							placeholder="Cidade">
+							placeholder="Cidade" value="${funcionario.endereco.cidade}">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="exampleInputCountryUF">Estado</label> <select
 							class="form-control" id="exampleInputCountryUF"
 							name="endereco.uf">
-							<option value="" selected="selected">Selecione um estado</option>
+							<option value="${funcionario.endereco.uf}" selected="selected">${funcionario.endereco.uf}</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
 							<option value="AP">Amapa</option>
@@ -178,7 +209,7 @@
 					<div class="col-md-4 mb-3">
 						<label for="validationCEP">CEP</label> <input type="text"
 							name="endereco.cep" class="form-control" id="validationCEP"
-							placeholder="00000-000">
+							placeholder="00000-000" value="${funcionario.endereco.cep}">
 					</div>
 				</div>
 			</div>
@@ -187,32 +218,32 @@
 					<div class="col-md-2 mb-3">
 						<label for="validationFone">Fone</label> <input type="text"
 							name="fone" class="form-control" id="validationFone"
-							placeholder="000 9999-9999">
+							placeholder="000 9999-9999" value="${funcionario.fone}">
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationCelular">Celular</label> <input type="text"
 							name="fone2" class="form-control" id="validationCelular"
-							placeholder="DDD 9 9999-9999" required>
+							placeholder="DDD 9 9999-9999" required value="${funcionario.fone}">
 						<div class="invalid-feedback">Informe um Número para
 							contato.</div>
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="inputFuncao">Função</label>
-						<label class="form-control" > ${objetoConfigMetodo.funcao} </label>
-							<input type="hidden" name="funcao" value="${objetoConfigMetodo.funcao}" class="form-control"
+						<label class="form-control" >${funcionario.funcao}</label>
+							<input type="hidden" name="funcao" value="${funcionario.funcao}" class="form-control"
 							id="inputFuncao">
 					</div>
 					<div class="col-md-4 mb-3">
 						<label for="exampleInputCountryNivel">Nível</label> <select
 							class="form-control" id="exampleInputCountryNivel" name="nivel"
 							required>
-							<option value="" selected="selected">Selecione um Nível</option>
+							<option value="${funcionario.nivel}" selected="selected">${funcionario.nivel}</option>
 							<option value="Operacional">Operacional</option>
 							<option value="Coordenador">Coordenador</option>
 							<option value="Gerente">Gerente</option>
 							<option value="Outro">Outro</option>
 						</select>
-						<div class="invalid-feedback">Informe a Função.</div>
+						<div class="invalid-feedback">Informe a Nível.</div>
 					</div>
 					<div class="col-md-6 mb-3">
 						<label for="cbBoxModalidades" id="lblModalidades" hidden="true">Modalidades</label> <select hidden="true"
@@ -234,7 +265,11 @@
 						<div class="form-group">
 							<label  for="listaEspecialidades" id="lblEspecialidades" hidden="true">Especialidades</label>
 							<select multiple hidden="true" class="form-control" id="listaEspecialidades" name="especialidades">
-							
+								<c:forEach items="${funcionario.especialidades}"
+								var="modalidade">
+								<option value="${modalidade}">${modalidade}</option>
+							</c:forEach>
+						</select>
 							</select>
 						</div>
 					</div>

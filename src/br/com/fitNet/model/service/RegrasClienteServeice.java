@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fitNet.model.Cliente;
@@ -13,14 +14,14 @@ import br.com.fitNet.model.exception.CPFInvalidoException;
 import br.com.fitNet.model.exception.ClienteInvalidoException;
 import br.com.fitNet.model.exception.NomeUsuarioInvalidoException;
 import br.com.fitNet.model.exception.SenhaInvalidaException;
-import br.com.fitNet.model.percistence.ClienteDao;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioCliente;
 import br.com.fitNet.util.ValidarCPF;
 
 @Service
 public class RegrasClienteServeice {
 
-	IRepositorioCliente repClienteDao = new ClienteDao();
+	@Autowired
+	IRepositorioCliente repClienteDao;
 
 	public void incluir(Cliente cliente)
 			throws SQLException, ClienteInvalidoException, NomeUsuarioInvalidoException, CPFInvalidoException, SenhaInvalidaException {

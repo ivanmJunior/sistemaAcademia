@@ -48,7 +48,6 @@ public class ClienteController {
 			regraCliente.incluir(cliente);
 		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException | SenhaInvalidaException e) {
 			msg.setMensagemErro("Erro ao cadastrar! "+e.getMessage());
-			e.printStackTrace();
 			return "redirect:mostraMensagemCliente";
 		}
 		return "redirect:listarClientes";
@@ -89,7 +88,6 @@ public class ClienteController {
 			msg.setMensagemSucesso("Secesso! Seja Bem Vindo!");
 		} catch (ClienteInvalidoException | SQLException | NomeUsuarioInvalidoException | CPFInvalidoException | SenhaInvalidaException e) {
 			msg.setMensagemErro("Erro ao cadastrar! "+e.getMessage());
-			e.printStackTrace();
 		}
 		return "redirect:mostraMensagemCliente";
 	}
@@ -117,7 +115,6 @@ public class ClienteController {
 			regraCliente.remover(cliente);
 		} catch (SQLException e) {
 			msg.setMensagemErro("Erro ao remover! "+e.getMessage());
-			e.printStackTrace();
 			return "redirect:mostraMensagemCliente";
 		}
 		
@@ -133,7 +130,6 @@ public class ClienteController {
 			modelo.addAttribute("cliente", clienteDaConsulta);
 		} catch (SQLException e) {
 			msg.setMensagemErro("Erro! "+e.getMessage());
-			e.printStackTrace();
 			return "redirect:mostraMensagemCliente";
 		}
 		
@@ -148,7 +144,6 @@ public class ClienteController {
 			regraCliente.alterar(cliente);
 			} catch (Exception e) {
 				msg.setMensagemErro("Erro! "+e.getMessage());
-				e.printStackTrace();
 				return "redirect:mostraMensagemCliente";
 			}
 		return "redirect:listarClientes";
@@ -163,7 +158,6 @@ public class ClienteController {
 			modelo.addAttribute("clientes", listaClientes);
 		} catch (SQLException e) {
 			msg.setMensagemErro("Erro! "+e.getMessage());
-			e.printStackTrace();
 			return "redirect:mostraMensagemCliente";
 		}
 		

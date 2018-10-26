@@ -4,10 +4,13 @@ import java.sql.SQLException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.fitNet.model.Acesso;
 import br.com.fitNet.model.Funcionario;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioFuncionario;
 
+@Repository
 public class FuncionarioDao implements IRepositorioFuncionario {
 
 	public static Set<Funcionario> LISTA_FUNCIONARIOS = new LinkedHashSet<>();
@@ -28,13 +31,28 @@ public class FuncionarioDao implements IRepositorioFuncionario {
 	public void incluir(Funcionario funcionario) {
 		LISTA_FUNCIONARIOS.add(funcionario);
 		System.out.println("adicionado");
+		System.out.println(funcionario.getEspecialidades().toString());
 		
 	}
 
 	@Override
 	public void alterar(Funcionario funcionario) {
-		// TODO Auto-generated method stub
 		
+		for(Funcionario funcionarioDaLista : LISTA_FUNCIONARIOS){
+			if(funcionarioDaLista.getId() == funcionario.getId()){
+				funcionarioDaLista.getAcesso().setSenha(funcionario.getAcesso().getSenha());
+				funcionarioDaLista.setNome(funcionario.getNome());
+				funcionarioDaLista.setCpf(funcionario.getCpf());
+				funcionarioDaLista.setDataAlteracao(funcionario.getDataAlteracao());
+				funcionarioDaLista.setDataNascimento(funcionario.getDataNascimento());
+				funcionarioDaLista.setFone(funcionario.getFone());
+				funcionarioDaLista.setFone2(funcionario.getFone2());
+				funcionarioDaLista.setStatusAtivo(funcionario.isStatusAtivo());
+				
+				System.out.println("Alterado!!!");
+				
+			}
+		}
 	}
 
 	@Override
@@ -74,8 +92,13 @@ public class FuncionarioDao implements IRepositorioFuncionario {
 	}
 
 	@Override
-	public void remover(Funcionario funcionario) throws SQLException {
-		// TODO Auto-generated method stub
+	public void remover(int id) throws SQLException {
+		for(Funcionario funcionarioDaConsulta : LISTA_FUNCIONARIOS){
+			if(funcionarioDaConsulta.getId() == id){
+				LISTA_FUNCIONARIOS.remove(funcionarioDaConsulta);
+				break;
+			}
+		}
 		
 	}
 
@@ -88,8 +111,21 @@ public class FuncionarioDao implements IRepositorioFuncionario {
 				funcionarioRetorno = funcionarioDaConsulta;
 			}
 		}
-		
 		return funcionarioRetorno;
 	}
 
+	@Override
+	public Set<Funcionario> consultarPorNome(String nome) throws SQLException {
+		Set<Funcionario>funcionariosRetorno = new LinkedHashSet<>();
+		if(!nome.equals("")){
+			for(Funcionario funcionarioDaConsulta : LISTA_FUNCIONARIOS){
+				if(funcionarioDaConsulta.getNome().contains(nome)){
+					funcionariosRetorno.add(funcionarioDaConsulta);
+				}
+			}
+			return funcionariosRetorno;
+		}else{
+			return LISTA_FUNCIONARIOS;
+		}
+	}
 }
