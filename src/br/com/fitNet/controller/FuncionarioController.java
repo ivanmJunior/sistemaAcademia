@@ -3,6 +3,7 @@ package br.com.fitNet.controller;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class FuncionarioController {
 	public ModelAndView selecionaInserir(ConfigMetodo configMetodo){
 		
 		configMetodo.setFuncao(configMetodo.getFuncao().toUpperCase());	
-		Set<Modalidade> listaModalidades = new LinkedHashSet<>();
+		List<Modalidade> listaModalidades = null;
 		
 			if(configMetodo.getFuncao().equals("RECEPCIONISTA")){
 				configMetodo.setMetodo("adicionaAtendente");
@@ -253,10 +254,9 @@ public class FuncionarioController {
 				configMetodo.setMetodo("editarNutricionista");
 			}
 			
-			Set<Modalidade> listaModalidades = regraModalidade.consultar();
 			funcionarioDaConsulta.getDataAlteracao().setTime(new Date());
 			modelo.addAttribute("funcionario", funcionarioDaConsulta);
-			modelo.addAttribute("listaModalidades", listaModalidades);
+			modelo.addAttribute("listaModalidades", regraModalidade.consultar());
 			modelo.addAttribute("objetoConfigMetodo", configMetodo);
 		} catch (SQLException e) {
 			msg.setMensagemErro("Erro! "+e.getMessage());
@@ -323,7 +323,7 @@ public class FuncionarioController {
 	
 	
 	public ModelAndView execCarregarModalidades(String paginaRetorno){
-		Set<Modalidade> listaModalidades = new LinkedHashSet<>();
+		List<Modalidade> listaModalidades = null;
 		
 		try {
 			listaModalidades = regraModalidade.consultar();

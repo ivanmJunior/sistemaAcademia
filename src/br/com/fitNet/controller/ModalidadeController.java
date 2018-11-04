@@ -2,20 +2,25 @@ package br.com.fitNet.controller;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.fitNet.model.Modalidade;
-import br.com.fitNet.model.exception.ClienteInvalidoException;
+import br.com.fitNet.model.exception.CampoVazioException;
+import br.com.fitNet.model.exception.ModalidadeInvalidoException;
 import br.com.fitNet.model.service.RegrasModalidadeServeice;
+import br.com.fitNet.util.Mensagens;
 
+@Transactional
 @Controller
 public class ModalidadeController {
-	static int ID = 1; //provisório. Apenas para testes.
+	
+	Mensagens msg = new Mensagens();
 	
 	@Autowired
 	RegrasModalidadeServeice regraModalidade;
@@ -28,14 +33,16 @@ public class ModalidadeController {
 	@RequestMapping("adicionaModalidades")
 	public String execInserirModalidades(Modalidade modalidade){
 		
-		modalidade.setIdModalidade(ID++);
+		modalidade.setIdUsuarioCadastro(1);//provisório
+		modalidade.setIdUsuarioAlteracao(1);//provisório
 		modalidade.getDataCadastro().setTime(new Date());
 		modalidade.setDescricao(modalidade.getDescricao().toUpperCase());
 		try {
 			regraModalidade.incluir(modalidade);
-		} catch (ClienteInvalidoException | SQLException e) {
-			ID--;
-			e.printStackTrace();
+		
+		} catch (CampoVazioException | SQLException | ModalidadeInvalidoException e) {
+			msg.setMensagemErro("Erro na Inclusão! "+e.getMessage());
+			return "redirect:mostraMensagemModalidade";
 		}
 		return "redirect:listarModalidades";
 	}
@@ -44,8 +51,7 @@ public class ModalidadeController {
 	public String execListarModalidades(Model modelo){
 		
 		try {
-			Set<Modalidade>listaModalidades = regraModalidade.consultar();
-			modelo.addAttribute("listaModalidades", listaModalidades);
+			modelo.addAttribute("listaModalidades", regraModalidade.consultar());
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -72,7 +78,6 @@ public class ModalidadeController {
 		
 		try {
 			Modalidade modalidadeDaConsulta = regraModalidade.consultarPorId(idModalidade);
-			modalidadeDaConsulta.getDataAlteracao().setTime(new Date());
 			modelo.addAttribute("modalidade", modalidadeDaConsulta);
 		} catch (SQLException e) {
 			
@@ -86,11 +91,13 @@ public class ModalidadeController {
 	public String execEditarModalidades(Modalidade modalidade){
 			
 		try {
+			modalidade.getDataAlteracao().setTime(new Date());
 			modalidade.setDescricao(modalidade.getDescricao().toUpperCase());
 			regraModalidade.alterar(modalidade);
-			} catch (Exception e) {
-
-				e.printStackTrace();
+			
+		} catch (Exception e) {
+				msg.setMensagemErro("Erro ao Alterar! " + e.getMessage());
+				return "redirect:mostraMensagemModalidade";
 			}
 		
 		return "redirect:listarModalidades";
@@ -101,8 +108,7 @@ public class ModalidadeController {
 		
 		try {
 			descricao = descricao.toUpperCase();
-			Set<Modalidade>listaModalidades = regraModalidade.consultarPorDescricao(descricao);
-			modelo.addAttribute("listaModalidades", listaModalidades);
+			modelo.addAttribute("listaModalidades", regraModalidade.consultarPorDescricao(descricao));
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -111,5 +117,21 @@ public class ModalidadeController {
 		return "modalidade/modalidades";
 	}
 	
+	//Mensagens
+	@RequestMapping("mostraMensagemModalidade")
+	public ModelAndView execMensagens(){
+		String paginaMensagem = "";
+		
+		if(!msg.getMensagemSucesso().equals("")){
+			paginaMensagem = "/mensagemSucesso";
+		}else{
+			paginaMensagem = "/mensagemErro";
+		}
+		
+		ModelAndView modelo = new ModelAndView(paginaMensagem);
+		modelo.addObject("msg", msg);
+		return modelo;
+	
+	}  //Fim Mensagens
 	
 }

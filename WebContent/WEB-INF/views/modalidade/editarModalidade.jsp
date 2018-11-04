@@ -30,18 +30,24 @@
 		    <div class="col-md-4 mb-3">
 		      <label for="validationCodigo">Código</label>
 		      <label name="idModalidade" class="form-control" id="validationCodigo" >${modalidade.idModalidade}</label>
+		    <input type="hidden" name="idModalidade" value="${modalidade.idModalidade}"/>
+		    <input type="hidden" name="idUsuarioCadastro" value="${modalidade.idUsuarioCadastro}"/>
+		    <input type="hidden" name="idUsuarioAlteracao" value="${modalidade.idUsuarioAlteracao}"/>
 		    </div>
 		    <div class="col-md-4 mb-3">
-		      <label for="validationData">Data Cadastro</label>
-		      <input disabled="disabled" type="text" name="dataCadastro" 
-		      value="<fmt:formatDate value="${modalidade.dataCadastro.time}" pattern="dd/MM/yyyy"/>" 
-		      class="form-control" id="validationDataCadastro" required/>
+		      <label>Data Cadastro</label>
+		      <input disabled="disabled" type="text" class="form-control"
+		      value="<fmt:formatDate value="${modalidade.dataCadastro.time}" pattern="dd/MM/yyyy"/>" />
+		      
+		      <input type="date" hidden="true" class="form-control"
+							value='<fmt:formatDate value="${modalidade.dataCadastro.time}" 
+							pattern="yyyy-MM-dd"/>'	id="dataCadastro" name="dataCadastro"/>
 		    </div>
 		     <div class="col-md-4 mb-3">
-		      <label for="validationData">Data Alteração</label>
-		      <input disabled="disabled" type="text" name="dataAlteracao" 
+		      <label >Data Alteração</label>
+		      <input disabled="disabled" type="text" 
 		      value="<fmt:formatDate value="${modalidade.dataAlteracao.time}" pattern="dd/MM/yyyy"/>" 
-		      class="form-control" id="validationData" required/>
+		      class="form-control"/>
 		    </div>
 		    </div>
 		  <div class="form-row">

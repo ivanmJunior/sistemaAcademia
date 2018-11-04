@@ -11,7 +11,7 @@
 		<a class="p-2 text-dark" href="#">Planos</a>
 	</nav>
 	<a class="btn btn-outline-primary" href="" data-toggle="modal" 
-	     data-target="#cadastrarClienteUsuario">Inscreva-se</a>
+	     data-target="#cadastrarClienteUsuario" onclick="inscrevaOff();">Inscreva-se</a>
 		<a	class="btn btn-outline-primary"
 		href="<%=request.getContextPath()%>/loginCliente">Entrar</a>
 </div>

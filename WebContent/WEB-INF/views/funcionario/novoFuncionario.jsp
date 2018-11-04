@@ -24,7 +24,7 @@
 	<div class="container">
 		<h1 class="mt-5">Cadastrar Novo Funcionario</h1>
 
-		<form class="needs-validation" novalidate
+		<form id="formFuncionario" class="needs-validation" novalidate
 			action="<%=request.getContextPath()%>/${objetoConfigMetodo.metodo}"
 			method="post">
 			<div class="p-4 bg-light rounded">

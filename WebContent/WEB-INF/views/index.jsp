@@ -33,7 +33,7 @@
 		<div class="card-deck mb-3 text-center">
 			<div class="card mb-4 shadow-sm">
 				<div class="card-header">
-					<h4 class="my-0 font-weight-normal">Active</h4>
+					<h4 id="tituloActive" class="my-0 font-weight-normal">Active</h4>
 				</div>
 				<div class="card-body">
 					<h1 class="card-title pricing-card-title">
@@ -45,13 +45,13 @@
 						<li>Musculação</li>
 						<li>-</li>
 					</ul>
-					<button type="button"
-						class="btn btn-lg btn-block btn-outline-primary">Inscreva-se</button>
+					<button type="button" class="btn btn-lg btn-block btn-outline-primary" data-toggle="modal" 
+	     data-target="#cadastrarClienteUsuario" onclick="inscreva('#tituloActive');">Inscreva-se</button>
 				</div>
 			</div>
 			<div class="card mb-4 shadow-sm">
 				<div class="card-header">
-					<h4 class="my-0 font-weight-normal">Pro</h4>
+					<h4 id="tituloPro" class="my-0 font-weight-normal">Pro</h4>
 				</div>
 				<div class="card-body">
 					<h1 class="card-title pricing-card-title">
@@ -63,12 +63,14 @@
 						<li>Funcional 1 vez por semana</li>
 						<li>-</li>
 					</ul>
-					<button type="button" class="btn btn-lg btn-block btn-primary">Inscreva-se</button>
+					<button type="button" onclick="inscreva('#tituloPro');" data-toggle="modal" 
+	     data-target="#cadastrarClienteUsuario"  
+	     class="btn btn-lg btn-block btn-primary">Inscreva-se</button>
 				</div>
 			</div>
 			<div class="card mb-4 shadow-sm">
 				<div class="card-header">
-					<h4 class="my-0 font-weight-normal">Pro Plus</h4>
+					<h4 id="tituloProPlus" class="my-0 font-weight-normal">Pro Plus</h4>
 				</div>
 				<div class="card-body">
 					<h1 class="card-title pricing-card-title">
@@ -80,7 +82,9 @@
 						<li>Aerobica 3 vezes por mês</li>
 						<li>1 Luta</li>
 					</ul>
-					<button type="button" class="btn btn-lg btn-block btn-primary">Inscreva-se</button>
+					<button type="button" onclick="inscreva('#tituloProPlus');" data-toggle="modal" 
+					     data-target="#cadastrarClienteUsuario"
+					class="btn btn-lg btn-block btn-primary">Inscreva-se</button>
 				</div>
 			</div>
 		</div>
@@ -88,7 +92,7 @@
 		<jsp:include page="/WEB-INF/views/templates/rodapeWhite.jsp"></jsp:include>
 	</div>
 	
-	<!-- Modal Formulário de Cadoastro de Cliente -->
+	<!-- Modal Formulário de Cadastro de Cliente -->
 	
 	<div class="modal fade " id="cadastrarClienteUsuario" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,9 +138,7 @@
 								<label for="validationCPF">CPF</label> <input type="text"
 									name="cpf" minLenght="11" class="form-control" id="validationCPF"
 									placeholder="Apenas Números" required="required">
-									
 								<div class="invalid-feedback">Informe um Número	de CPF Válido.</div>
-								
 							</div>
 						</div>
 						<div class="form-row">
@@ -170,10 +172,17 @@
 								<div class="invalid-feedback">Por Favor redefina as Senhas. Minimo 6 digitos.</div>
 							</div>
 						</div>
+						<div class="form-row">
+							<div class="col-md-12 mb-2">
+								<label id="lblNomePlano" hidden="true">Plano Selecionado</label> 
+								<label id="txtNomePlano" class="form-control" hidden="true">Nome do plano</label> 
+								
+							</div>
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Fechar</button>
-							<button type="submit" class="btn btn-success">Confirmar</button>
+							<button type="submit" class="btn btn-success" >Confirmar</button>
 						</div>
 					</form>
 				</div>
@@ -188,6 +197,8 @@
 	<script	src="<%=request.getContextPath()%>/resources/js/verificarSenhas.js"></script>
 	<script	src="<%=request.getContextPath()%>/resources/js/validarCpf.js"></script>
 	<script	src="<%=request.getContextPath()%>/resources/js/validaFormClienteUser.js"></script>
+	<script	src="<%=request.getContextPath()%>/resources/js/scriptIndex.js"></script>
+	
 
 </body>
 </html>

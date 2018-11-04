@@ -1,13 +1,14 @@
 package br.com.fitNet.model.service;
 
 import java.sql.SQLException;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fitNet.model.Modalidade;
-import br.com.fitNet.model.exception.ClienteInvalidoException;
+import br.com.fitNet.model.exception.CampoVazioException;
+import br.com.fitNet.model.exception.ModalidadeInvalidoException;
 import br.com.fitNet.model.percistence.Interfaces.IRepositorioModalidade;
 
 @Service
@@ -16,12 +17,15 @@ public class RegrasModalidadeServeice{
 	@Autowired
 	IRepositorioModalidade repModalidadeDao;
 	
-	public void incluir(Modalidade modalidade) throws ClienteInvalidoException, SQLException{
+	public void incluir(Modalidade modalidade) throws CampoVazioException, SQLException, ModalidadeInvalidoException{
 	
-		if(modalidade.getDescricao().equals(""))
-		{
-			throw new ClienteInvalidoException("Campos não podem ser vazio!");
-		}else {
+		if(modalidade.getDescricao().equals("")){
+			throw new CampoVazioException("Campos não podem ser vazio!");
+		
+		}else if(existeDescricaoModalidade(modalidade.getDescricao())){
+			throw new ModalidadeInvalidoException("Descrição já existe para outra modalidade cadastrada!");
+			
+		}else{
 			repModalidadeDao.incluir(modalidade);
 		}
 	}
@@ -41,7 +45,7 @@ public class RegrasModalidadeServeice{
 		
 	}
 	
-	public Set<Modalidade> consultar() throws SQLException{
+	public List<Modalidade> consultar() throws SQLException{
 	
 		return repModalidadeDao.consultar();
 	}
@@ -67,8 +71,17 @@ public class RegrasModalidadeServeice{
 	
 	}
 	
-	public Set<Modalidade> consultarPorDescricao(String descricao) throws SQLException{
-		return repModalidadeDao.consultarPorDescricao(descricao);
+	public List<Modalidade> consultarPorDescricao(String descricao) throws SQLException{
+		return repModalidadeDao.consultarParteDescricao(descricao);
+	}
+	
+	public boolean existeDescricaoModalidade(String descricao) throws SQLException{
+		Modalidade modalidadeDaConsulta = repModalidadeDao.consultarModalidade(descricao);
+		if(modalidadeDaConsulta != null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 

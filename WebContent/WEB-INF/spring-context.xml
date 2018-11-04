@@ -21,5 +21,29 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
+      
+    <bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost/academiaweb"/>
+	    <property name="username" value="root"/>
+	    <property name="password" value=""/>
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	  <property name="dataSource" ref="mysqlDataSource" />
+	  <property name="jpaVendorAdapter">
+	    <bean 
+	      class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	  </property>
+	</bean>
+	
+	
+	 <bean id="transactionManager"
+	      class="org.springframework.orm.jpa.JpaTransactionManager">
+		  <property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+	<tx:annotation-driven/> 
+	
 
 </beans>

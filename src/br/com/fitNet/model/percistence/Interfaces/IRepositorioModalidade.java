@@ -1,7 +1,7 @@
 package br.com.fitNet.model.percistence.Interfaces;
 
 import java.sql.SQLException;
-import java.util.Set;
+import java.util.List;
 
 import br.com.fitNet.model.Modalidade;
 
@@ -9,7 +9,7 @@ import br.com.fitNet.model.Modalidade;
 public interface IRepositorioModalidade {
 
 	void incluir(Modalidade modalidade) throws SQLException;
-	Set<Modalidade> consultar()throws SQLException;
+	List<Modalidade> consultar()throws SQLException;
 	void removerDefinitivo(Modalidade modalidade) throws SQLException;
 	void remover(Modalidade modalidade) throws SQLException;
 	void alterar(Modalidade modalidade) throws SQLException;
@@ -17,5 +17,5 @@ public interface IRepositorioModalidade {
 	Modalidade consultarModalidade(Modalidade modalidade) throws SQLException;
 	Modalidade consultarModalidade(String modalidade) throws SQLException;
 	Modalidade consultarPorId(int idModalidade) throws SQLException;
-	Set<Modalidade> consultarPorDescricao(String descricaoModalidade) throws SQLException;
+	List<Modalidade> consultarParteDescricao(String descricaoModalidade) throws SQLException;
 }

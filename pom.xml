@@ -7,22 +7,14 @@
 	<packaging>war</packaging>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+			</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
@@ -34,12 +26,16 @@
 		</plugins>
 	</build>
 
+  <properties>
+	<spring.version>4.2.1.RELEASE</spring.version>
+  </properties>
+  
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-webmvc</artifactId>
-		    <version>5.0.1.RELEASE</version>
+		    <version>${spring.version}</version>
 		</dependency>
 
 		
@@ -47,13 +43,13 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-web</artifactId>
-		    <version>5.0.1.RELEASE</version>
+		    <version>${spring.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-core</artifactId>
-		    <version>5.0.1.RELEASE</version>
+		    <version>${spring.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -81,7 +77,7 @@
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-entitymanager</artifactId>
-		    <version>5.0.1.Final</version>
+		    <version>4.1.4.Final</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
@@ -95,16 +91,41 @@
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
-		    <version>5.0.1.Final</version>
+		    <version>4.1.4.Final</version>
 		</dependency>
+
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-orm</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
 		
-		<!-- https://mvnrepository.com/artifact/springframework/spring-orm -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
-		    <groupId>springframework</groupId>
-		    <artifactId>spring-orm</artifactId>
-		    <version>1.0.1</version>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.6</version>
 		</dependency>
-		
+
+		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
+		<dependency>
+		    <groupId>commons-pool</groupId>
+		    <artifactId>commons-pool</artifactId>
+		    <version>1.6</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
 
   	</dependencies>
 </project>

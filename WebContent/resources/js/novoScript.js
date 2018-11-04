@@ -1,5 +1,6 @@
 
 $(document).ready(habilitaComponente());
+
 var campo = document.querySelector('#validationSenha');
 var combo = document.querySelector('#cbBoxModalidades');
 var primeiraOpcaoLista = 0;
@@ -81,7 +82,6 @@ function removeTudo() {
 	}
 	$.get("limparListaEspecialidades");
 }
-
 
 function habilitaComponente(){
 	var funcao = document.querySelector('#inputFuncao');
@@ -178,6 +178,4 @@ function limiteMinimo(){
 }
 
 campo.onkeyup = limiteMinimo;
-
-
 

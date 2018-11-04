@@ -46,9 +46,9 @@
 		      <th scope="col">Código</th>
 		      <th scope="col">Descrição</th>
 		      <th scope="col">Valor</th>
-		      <th scope="col">Observação</th>
 		      <th scope="col">Data Cadastro</th>
 		      <th scope="col">Ativa</th>
+		      <th scope="col">Observação</th>
 		      <th scope="col">Ação</th>
 		    </tr>
 		  </thead>
@@ -59,7 +59,6 @@
 	  		 	  <td>${modalidade.descricao}</td>
 	  		 	  <td><fmt:setLocale value="PT_BR"/>
 	  		 	  	<fmt:formatNumber value="${modalidade.valor}" type="currency"></fmt:formatNumber> </td>
-			      <td>${modalidade.observacao}</td>
 			      <td><fmt:formatDate value="${modalidade.dataCadastro.time}" pattern="dd-MM-yyyy"/></td>
 			      <c:if test="${modalidade.statusAtivo eq true}">
 			      	<td>SIM</td>
@@ -67,6 +66,7 @@
 			      <c:if test="${modalidade.statusAtivo eq false}">
 			      	<td>NÃO</td>
 			      </c:if>
+			      <td>${modalidade.observacao}</td>
 			      <td><a href="<%=request.getContextPath() %>/carregarTelaModalidade?idModalidade=${modalidade.idModalidade}"
 			      class="btn btn-primary btn-xs">Editar</a>
 			      	  <a href="<%=request.getContextPath() %>/removeModalidade?idModalidade=${modalidade.idModalidade}" class="btn btn-danger btn-xs">Excluir</a>
