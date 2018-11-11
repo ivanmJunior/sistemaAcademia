@@ -15,7 +15,7 @@
 </head>
 
 <body class="text-center">
-	<form class="form-signin" action="<%=request.getContextPath()%>/areaDoCLiente" method="post">
+	<form class="form-signin" action="<%=request.getContextPath()%>/logarNaAreaDoCLiente" method="post">
 		<jsp:include page="/WEB-INF/views/templates/frmLogin.jsp"></jsp:include>
 	</form>
 </body>

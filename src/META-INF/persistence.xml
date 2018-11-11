@@ -9,6 +9,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         
         <class>br.com.fitNet.model.Modalidade</class>
+        <class>br.com.fitNet.model.Acesso</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

@@ -3,10 +3,10 @@ Observações:
 Dia 18/10/2018
 
 	OK!--> Baixar dependencias hibernate e JPA configurar no arquivo pom.
-	Configurar Hibernate e jpa. configurar arquivo context.
+	OK!--> Configurar Hibernate e jpa. configurar arquivo context.
 	Mapear entidades com hibernate.
-	Baixar dependencias do JDBC.
-	Configurar arquido spring-context com o JDBC...
+	OK!--> Baixar dependencias do JDBC.
+	OK!--> Configurar arquido spring-context com o JDBC...
 
 Dia 21/10/2018
 
@@ -20,8 +20,8 @@ Dia 22/10/2018
 Dia 22/10/2018
 
 	OK!--> Foram criados metodos hashcode e equals das classes: Pessoa, Funcionario, Acesso e Endereco.
-	Criado Formulário editarFuncionario.
-	verificar porque lista de especialidade está retornando vazia quando consulta o instrutor. Corrigir para
+	OK!--> Criado Formulário editarFuncionario.
+	OK!--> verificar porque lista de especialidade está retornando vazia quando consulta o instrutor. Corrigir para
 		testar o carregamento da tela de editar.
 
 Dia 25/10/2018
@@ -31,6 +31,28 @@ Dia 25/10/2018
 	
 Dia 26/10/2018
 
-	Verificado um problema na rotina de excluir quando qualquer item cadastrado é alterado. Verificando a rotina
+	OK!--> Verificado um problema na rotina de excluir quando qualquer item cadastrado é alterado. Verificando a rotina
 	percebe-se que o precesso perocorre o caminho de exclusão como programado, porém o metodo remove da lista não
 	remove o item.. Isso será solucionado com a implemetação do banco de dados.
+	
+Dia 04/11/2018
+
+	OK!--> Criar autenticação dos usuário.
+	
+	Criar telas de Listar, cadastrar e editar plano.
+		- O Formulário novoPlano deve ter componentes que possibilitem a associação das modalidades que faram parte
+		  do plano a cadastrar. OBS.: A tela de editar deve ter o mesmo função de associação de Modalidades.
+	
+Dia 06/11/2018
+
+	Verificar como restringir acesso a páginas para usuários não permitidos;
+	
+Dia 07/11/2018
+
+	Garantir que cada usuario cliente ao acessar área do cliente, tenha acesso apenas as suas informações.
+	Alinhar banco de dados com classe do Projeto.
+	
+
+
+	
+	

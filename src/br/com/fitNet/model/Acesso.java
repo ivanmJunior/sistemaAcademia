@@ -1,18 +1,58 @@
 package br.com.fitNet.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name="usuario")
 public class Acesso {
 	
+	@Id
+	@GeneratedValue
+	@Column(name="id_usuario", nullable = false)
 	private int id;
+	
+	@Column(name="nomeUsuario", nullable = false)
 	private String usuario;
+	
 	private String senha;
+	
+	@Transient
 	private String confirmarSenha;
-	private String statusAtivo = "S";
-	private String eliminado = "N";
-	private Date dataCadastro;
-	private Date dataAlteracao;
-	public static Acesso USUARIO_LOGADO;
+	
+	@Column(name="status")
+	private boolean statusAtivo;
+	
+	private boolean eliminado;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Calendar dataCadastro;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Calendar dataAlteracao;
+	
+	@Column(name="id_cliente")
+	private int idCliente;
+	
+	@Column(name="id_funcionario")
+	private int idFuncionario;
+	
+	public Acesso(){
+		this.idCliente = -1;
+		this.idFuncionario = -1;
+	}
 	
 	public int getId() {
 		return id;
@@ -38,30 +78,42 @@ public class Acesso {
 	public void setConfirmarSenha(String confirmarSenha) {
 		this.confirmarSenha = confirmarSenha;
 	}
-	public String getStatusAtivo() {
+	public boolean isStatusAtivo() {
 		return statusAtivo;
 	}
-	public void setStatusAtivo(String status) {
+	public void setStatusAtivo(boolean status) {
 		this.statusAtivo = status;
 	}
-	public String getEliminado() {
+	public boolean isEliminado() {
 		return eliminado;
 	}
-	public void setEliminado(String eliminado) {
+	public void setEliminado(boolean eliminado) {
 		this.eliminado = eliminado;
 	}
 
-	public Date getDataCadastro() {
+	public Calendar getDataCadastro() {
 		return dataCadastro;
 	}
-	public void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-	public Date getDataAlteracao() {
+	public Calendar getDataAlteracao() {
 		return dataAlteracao;
 	}
-	public void setDataAlteracao(Date dataAlteracao) {
+	public void setDataAlteracao(Calendar dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
+	}
+	public int getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+	public int getIdFuncionario() {
+		return idFuncionario;
+	}
+	public void setIdFuncionario(int idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
 	@Override
 	public int hashCode() {
@@ -70,10 +122,12 @@ public class Acesso {
 		result = prime * result + ((confirmarSenha == null) ? 0 : confirmarSenha.hashCode());
 		result = prime * result + ((dataAlteracao == null) ? 0 : dataAlteracao.hashCode());
 		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
-		result = prime * result + ((eliminado == null) ? 0 : eliminado.hashCode());
+		result = prime * result + (eliminado ? 1231 : 1237);
 		result = prime * result + id;
+		result = prime * result + idCliente;
+		result = prime * result + idFuncionario;
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		result = prime * result + ((statusAtivo == null) ? 0 : statusAtivo.hashCode());
+		result = prime * result + (statusAtivo ? 1231 : 1237);
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -101,22 +155,20 @@ public class Acesso {
 				return false;
 		} else if (!dataCadastro.equals(other.dataCadastro))
 			return false;
-		if (eliminado == null) {
-			if (other.eliminado != null)
-				return false;
-		} else if (!eliminado.equals(other.eliminado))
+		if (eliminado != other.eliminado)
 			return false;
 		if (id != other.id)
+			return false;
+		if (idCliente != other.idCliente)
+			return false;
+		if (idFuncionario != other.idFuncionario)
 			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
 		} else if (!senha.equals(other.senha))
 			return false;
-		if (statusAtivo == null) {
-			if (other.statusAtivo != null)
-				return false;
-		} else if (!statusAtivo.equals(other.statusAtivo))
+		if (statusAtivo != other.statusAtivo)
 			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
@@ -125,5 +177,6 @@ public class Acesso {
 			return false;
 		return true;
 	}
+
 
 }

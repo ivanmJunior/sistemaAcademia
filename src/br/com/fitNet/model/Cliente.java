@@ -3,20 +3,22 @@ package br.com.fitNet.model;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.persistence.OneToOne;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class Cliente extends Pessoa{
 	
+	@OneToOne
 	private Matricula matricula;
-	private Acesso acesso;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Calendar dataCadastro;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Calendar dataAlteracao;
 	
-	private Endereco endereco;
 	private boolean statusAtivo;
 	
 	public Cliente(){
@@ -24,8 +26,8 @@ public class Cliente extends Pessoa{
 		this.dataCadastro = new GregorianCalendar();
 		this.dataAlteracao = new GregorianCalendar();
 		this.matricula = new Matricula();
-		this.acesso = new Acesso();
-		this.endereco = new Endereco();
+		this.setAcesso(new Acesso());
+		this.setEndereco(new Endereco());
 		
 	}
 
@@ -36,14 +38,6 @@ public class Cliente extends Pessoa{
 
 	public void setMatricula(Matricula matricula) {
 		this.matricula = matricula;
-	}
-
-	public Acesso getAcesso() {
-		return acesso;
-	}
-
-	public void setAcesso(Acesso acesso) {
-		this.acesso = acesso;
 	}
 
 	public Calendar getDataCadastro() {
@@ -60,14 +54,6 @@ public class Cliente extends Pessoa{
 
 	public void setDataAlteracao(Calendar dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public boolean isStatusAtivo() {

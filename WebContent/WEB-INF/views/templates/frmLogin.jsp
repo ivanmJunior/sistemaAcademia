@@ -1,15 +1,21 @@
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <img class="mb-4"
-	src="<%=request.getContextPath()%>/resources/imagem/Logo64x64.png" alt=""
-	width="200" height="200">
+	src="<%=request.getContextPath()%>/resources/imagem/Logo64x64.png"
+	alt="" width="200" height="200">
+	
 <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+
 <label for="inputEmail" class="sr-only">Email adress</label>
-<input type="email" id="inputEmail" class="form-control"
-	placeholder="Usuário" name="txtUsuarioLogin" required autofocus>
+<input type="text" id="inputEmail" class="form-control"
+	placeholder="Usuário" name="usuario" required autofocus>
+
 <label for="inputPassword" class="sr-only">Password</label>
 <input type="password" id="inputPassword" class="form-control"
-	placeholder="Senha" name="txtSenhaLogin" required>
+	placeholder="Senha" name="senha" required>
+	
 <div class="checkbox mb-3">
 	<label> <input type="checkbox" value="remember-me">
 		Lembre-me

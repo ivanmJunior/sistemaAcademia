@@ -28,11 +28,6 @@ public class ClienteController {
 	@Autowired
 	RegrasClienteServeice regraCliente;
 	
-	@RequestMapping("areaDoCLiente")
-	public String efetuarLoginCliente() {
-		return "cliente/areaDoCliente";
-	}
-	
 	@RequestMapping("adicionaClientes")
 	public String execInserirCliente(Cliente cliente){
 		ID++;

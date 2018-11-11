@@ -27,68 +27,61 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
-
-		<!-- Main Header -->
-		<header class="main-header"> <!-- Logo --> <a
-			href="<%=request.getContextPath()%>/index" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini">FitNet</span> <!-- logo for regular state and mobile devices -->
+	
+		<header class="main-header"> 
+		<a	href="<%=request.getContextPath()%>/index" class="logo"> 
+			<span class="logo-mini">FitNet</span> 
 			<span class="logo-lg">FitNet</span>
-		</a> <!-- Header Navbar --> <nav class="navbar navbar-static-top"
-			role="navigation"> <!-- Sidebar toggle button--> <a href="#"
-			class="sidebar-toggle" data-toggle="push-menu" role="button"> <span
-			class="sr-only">Toggle navigation</span>
-		</a> <!-- Navbar Right Menu -->
+		</a> 
+		<nav class="navbar navbar-static-top"
+			role="navigation"> 
+			<a href="#"	class="sidebar-toggle" data-toggle="push-menu" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a> 
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">
-				<!-- User Account Menu -->
-				<li class="dropdown user user-menu">
-					<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <!-- The user image in the navbar--> <img
-						src="<%=request.getContextPath()%>/resources/dist/img/avatar5.png"
-						class="user-image" alt="User Image"> <!-- hidden-xs hides the username on small devices so only the image appears. -->
-						<span class="hidden-xs">Fulano Junior</span>
-				</a>
+				
+				<li class="dropdown user user-menu" class="nav-item active dropdown">
+					 <a href="#" class="nav-link dropdown-toggle" role="button" aria-haspopup="true"
+					 aria-expanded="false"	data-toggle="dropdown"> 
+					<img src="<%=request.getContextPath()%>/resources/dist/img/avatar5.png"
+						class="user-image" alt="User Image">
+						<span class="hidden-xs">${usuarioLogado.usuario}</span>
+					</a>
 					<ul class="dropdown-menu">
-						<!-- The user image in the menu -->
-						<li class="user-header"><img
-							src="<%=request.getContextPath()%>/resources/dist/img/avatar5.png"
+						<li class="user-header">
+						<img	src="<%=request.getContextPath()%>/resources/dist/img/avatar5.png"
 							class="img-circle" alt="User Image">
-
-							<p>
-								Fulano Junior - Web Developer <small>Membro desde Abr.
-									2018</small>
-							</p></li>
-						<!-- Menu Body -->
-						<li class="user-body">
-							<div class="row">
-								<div class="col-xs-4 text-center">
-									<a href="#">Followers</a>
-								</div>
-								<div class="col-xs-4 text-center">
-									<a href="#">Sales</a>
-								</div>
-								<div class="col-xs-4 text-center">
-									<a href="#">Friends</a>
-								</div>
-							</div> <!-- /.row -->
 						</li>
-						<!-- Menu Footer-->
-						<li class="user-footer">
-							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">Perfil</a>
-							</div>
-							<div class="pull-right">
-								<a href="#" class="btn btn-default btn-flat">Sair</a>
-							</div>
+				
+					</ul>
+				</li>
+			</ul>
+			
+			<ul class="nav navbar-nav">
+				
+				<li class="dropdown user user-menu" class="nav-item active dropdown">
+					 <a href="<%=request.getContextPath()%>/logoutCliente" class="nav-link dropdown-toggle" role="button" aria-haspopup="true"
+					 aria-expanded="false"	data-toggle="dropdown"> 
+					<img src="<%=request.getContextPath()%>/resources/imagem/sair.png"
+					    class="user-image" alt="User Image">
+						<span class="hidden-xs">Sair</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="user-header">
+						<img	src="<%=request.getContextPath()%>/resources/imagem/sair.png"
+							class="img-circle" alt="User Image">
 						</li>
+				
 					</ul>
 				</li>
 			</ul>
 		</div>
-		</nav> </header>
-		<!-- Left side column. contains the logo and sidebar -->
-		<aside class="main-sidebar"> <!-- sidebar: style can be found in sidebar.less -->
-		<section class="sidebar"> <!-- Sidebar user panel (optional) -->
+		</nav>
+		</header>
+		
+		<aside class="main-sidebar"> 
+		<section class="sidebar"> 
 		<div class="user-panel">
 			<div class="pull-left image">
 				<img
@@ -96,7 +89,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>Fulano Junior</p>
+				<p>${usuarioLogado.usuario}</p>
 				<!-- Status -->
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
@@ -105,7 +98,7 @@
 		<!-- Sidebar Menu -->
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MENU</li>
-			<!-- Optionally, you can add icons to the links -->
+			
 			<li class="active"><a href="#1"><i class="fa "></i> <span>Agendar
 						Avaliação</span></a></li>
 			<li class="active"><a href="<%=request.getContextPath()%>/areaClienteTreino"><i class="fa "></i> <span>Marcar
@@ -117,17 +110,18 @@
 		</ul>
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">Financeiro</li>
-			<!-- Optionally, you can add icons to the links -->
+			
 			<li class="active"><a href="#4"><i class="fa "></i> <span>2º
 						via Boleto</span></a></li>
 			<li class="active"><a href="#5"><i class="fa "></i> <span>Extrato
 						de Pagamentos</span></a></li>
 		</ul>
-		<!-- /.sidebar-menu --> </section> <!-- /.sidebar --> </aside>
+		</section>
+		</aside>
 
-		<!-- Content Wrapper. Contains page content -->
+		
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
+		
 			<section class="content-header">
 			<h1>
 				Inicio <small>Planos</small>
@@ -145,9 +139,7 @@
 			</section>
 		</div>
 
-		
-		<!-- Main Footer -->
-		<footer class="main-footer"> <!-- To the right -->
+		<footer class="main-footer"> 
 		<div class="pull-right hidden-xs">
 			<a target="_blank" href="<%=request.getContextPath()%>/index">FitNet</a>
 		</div>

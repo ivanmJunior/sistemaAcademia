@@ -15,14 +15,13 @@
 	</head>
 	<body>
 		
-		<jsp:include page="/WEB-INF/views/templates/navBarDarkCorporation.jsp"></jsp:include>
-		
+		<jsp:include page="/WEB-INF/views/templates/navBarDarkCorporation.jsp" ></jsp:include>
 		<div class="container">
 		   
 			<h1 class="mt-5">FitNet</h1>
 			<p class="lead">Bem Vindo!</p>
 			<img src="<c:url value="/resources/imagem/Logo64x64.png"/>" alt=""
-					width="200" height="200" >
+					width="200" height="200">
 		</div>
 		
 		<jsp:include page="/WEB-INF/views/templates/modalFormulario.jsp"></jsp:include>

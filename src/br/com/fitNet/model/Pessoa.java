@@ -2,31 +2,47 @@ package br.com.fitNet.model;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public abstract class Pessoa{
 	
+	@Id
+	@GeneratedValue
 	private int id;
+	
 	private String nome;
 	private String cpf;
 	private String rg;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
 	
 	private String sexo;
 	private String fone;
+	
+	@Column(name="celular")
 	private String fone2;
+	
 	private String email;
-	private double peso;
-	private double altura;
-	private double iMC;
-	private double percentualGordura;
+
 	private int idade;
 	private boolean eliminado;
 	private String Observacao;
-	private Acesso acesso = new Acesso();
-	private Endereco endereco = new Endereco();
+	
+	@OneToOne
+	private Acesso acesso;
+	
+	@ManyToOne
+	private Endereco endereco;
 	
 	
 	public int getId() {
@@ -85,24 +101,7 @@ public abstract class Pessoa{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public double getPeso() {
-		return peso;
-	}
-	public void setPeso(double peso) {
-		this.peso = peso;
-	}
-	public double getAltura() {
-		return altura;
-	}
-	public void setAltura(double altura) {
-		this.altura = altura;
-	}
-	public double getiMC() {
-		return iMC;
-	}
-	public void setiMC(double iMC) {
-		this.iMC = iMC;
-	}
+	
 	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
@@ -115,12 +114,7 @@ public abstract class Pessoa{
 	public void setEliminado(boolean eliminado) {
 		this.eliminado = eliminado;
 	}
-	public double getPercentualGordura() {
-		return percentualGordura;
-	}
-	public void setPercentualGordura(double percentualGordura) {
-		this.percentualGordura = percentualGordura;
-	}
+	
 	public String getObservacao() {
 		return Observacao;
 	}
@@ -140,15 +134,15 @@ public abstract class Pessoa{
 	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((Observacao == null) ? 0 : Observacao.hashCode());
 		result = prime * result + ((acesso == null) ? 0 : acesso.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(altura);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + (eliminado ? 1231 : 1237);
@@ -156,19 +150,16 @@ public abstract class Pessoa{
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((fone == null) ? 0 : fone.hashCode());
 		result = prime * result + ((fone2 == null) ? 0 : fone2.hashCode());
-		temp = Double.doubleToLongBits(iMC);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + id;
 		result = prime * result + idade;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		temp = Double.doubleToLongBits(percentualGordura);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(peso);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		return result;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -187,8 +178,6 @@ public abstract class Pessoa{
 			if (other.acesso != null)
 				return false;
 		} else if (!acesso.equals(other.acesso))
-			return false;
-		if (Double.doubleToLongBits(altura) != Double.doubleToLongBits(other.altura))
 			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
@@ -222,8 +211,6 @@ public abstract class Pessoa{
 				return false;
 		} else if (!fone2.equals(other.fone2))
 			return false;
-		if (Double.doubleToLongBits(iMC) != Double.doubleToLongBits(other.iMC))
-			return false;
 		if (id != other.id)
 			return false;
 		if (idade != other.idade)
@@ -232,10 +219,6 @@ public abstract class Pessoa{
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
-			return false;
-		if (Double.doubleToLongBits(percentualGordura) != Double.doubleToLongBits(other.percentualGordura))
-			return false;
-		if (Double.doubleToLongBits(peso) != Double.doubleToLongBits(other.peso))
 			return false;
 		if (rg == null) {
 			if (other.rg != null)

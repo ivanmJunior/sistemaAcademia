@@ -8,7 +8,7 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<ul class="navbar-nav">
-		<li class="nav-item"><a class="nav-link " href="<%=request.getContextPath()%>/principalSistema">Principal</a></li>
+		<li class="nav-item"><a class="nav-link " href="<%=request.getContextPath()%>/telaPrincipalSistema">Principal</a></li>
 			<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#"
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -31,9 +31,8 @@
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Avaliação Física </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="" data-toggle="modal"
-						data-target="">Nova Avaliação</a> <a
-						class="dropdown-item"
+					<a class="dropdown-item" href="">Nova Avaliação</a>
+					<a	class="dropdown-item"
 						href="">Agendamentos</a>
 				</div></li>
 				<li class="nav-item dropdown">
@@ -41,15 +40,22 @@
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Contas </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="" data-toggle="modal"
-						data-target="">A Receber</a> <a
-						class="dropdown-item"
+					<a class="dropdown-item" href="" >A Receber</a>
+					<a	class="dropdown-item"
 						href="">Recebimentos</a>
 				</div></li>
 				<li class="nav-item"><a class="nav-link " href="#">Configuraçõs</a>
 				</li>
 				<li class="nav-item"><a class="nav-link " href="#">Ajuda</a></li>
-				<li class="nav-item active"><a class="nav-link"> Usuario:</a></li>
+				
+				<li class="nav-item active dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Usuario: ${usuarioLogado.usuario} </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="<%=request.getContextPath()%>/logoutSistema">Sair</a>
+					</div>
+				</li>
 			</ul>
 
 		</div>

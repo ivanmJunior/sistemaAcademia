@@ -28,7 +28,7 @@
   				
   				<div class="form-group">
   					<div class="col-sm-offset-2 col-sm-12">
-  						<a  href="<%=request.getContextPath()%>/loginCliente" class="btn btn-primary">Fazer Login</a>
+  						<a  href="<%=request.getContextPath()%>/formLoginCliente" class="btn btn-primary">Fazer Login</a>
   						<a href="<%=request.getContextPath()%>/index" class="btn btn-secondary">Página Inicial</a>
   					</div>
   				</div>

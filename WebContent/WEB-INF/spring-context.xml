@@ -45,5 +45,8 @@
 	</bean>
 	<tx:annotation-driven/> 
 	
+	<mvc:interceptors>
+	  <bean class="br.com.fitNet.util.AutorizadorInterceptor" />
+	</mvc:interceptors>
 
 </beans>

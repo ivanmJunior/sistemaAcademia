@@ -12,7 +12,7 @@
 		<link href="<%=request.getContextPath()%>/resources/css/signin.css"	rel="stylesheet">
 		
 		<title>Login Corporativo - FitNet</title>
-		
+		<jsp:include page="/WEB-INF/views/templates/navBarDark.jsp" ></jsp:include>
 	</head>
 	<body class="text-center">
 		
